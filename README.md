@@ -3,7 +3,9 @@ ELS for FiveM with [WM-ServerSirens](https://github.com/Walsheyy/WMServerSirens)
 By default there is a server side siren
 
 ### Requirements
-[WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
+- [WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
+- ELS Car and car_name.xml
+
 
 #### Default Controls
 https://github.com/MrDaGree/ELS-FiveM/wiki/Controls
