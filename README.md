@@ -21,7 +21,7 @@ https://github.com/MrDaGree/ELS-FiveM/wiki/Controls
 6. Enjoy!
 
 ### Do you need Japanese version?
-[Click me!]()
+[Click me!](https://github.com/tah5882/ELS-FiveM/wiki/Japanese-README)
 
 #### Convars
 | Convar              | Parameters        | Function                                                                                                              | Example Usage                | Default State |
