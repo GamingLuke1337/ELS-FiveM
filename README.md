@@ -1,3 +1,14 @@
+# what's this?
+ELS for FiveM
+By default there is a server side siren
+
+### Standard installation
+- [ELS-FiveM](https://github.com/MrDaGree/ELS-FiveM)'s future
+- Server Side Siren
+
+### Require
+[WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
+
 #### Default Controls
 https://github.com/MrDaGree/ELS-FiveM/wiki/Controls
 
