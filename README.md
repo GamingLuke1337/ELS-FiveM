@@ -1,12 +1,8 @@
 # what's this?
-ELS for FiveM
+ELS for FiveM with [WM-ServerSirens](https://github.com/Walsheyy/WMServerSirens)
 By default there is a server side siren
 
-### Standard installation
-- [ELS-FiveM](https://github.com/MrDaGree/ELS-FiveM)'s future
-- Server Side Siren
-
-### Require
+### Requirements
 [WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
 
 #### Default Controls
@@ -20,6 +16,9 @@ https://github.com/MrDaGree/ELS-FiveM/wiki/Controls
 4. Make altercations accordingly.
 5. Place any VCF files inside the `vcf` directory so they are able to be found.
 6. Enjoy!
+
+### Do you need Japanese version?
+[Click me!]()
 
 #### Convars
 | Convar              | Parameters        | Function                                                                                                              | Example Usage                | Default State |
