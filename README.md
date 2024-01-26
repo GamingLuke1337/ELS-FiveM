@@ -4,7 +4,7 @@ By default there is a server side siren
 
 ### Requirements
 - [WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
-- ELS Car and car_name.xml
+- ELS Car and `car_name.xml`
 
 
 #### Default Controls
