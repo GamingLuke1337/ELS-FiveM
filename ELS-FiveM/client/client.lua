@@ -1,5 +1,7 @@
 els_Vehicles = {}
 
+RequestScriptAudioBank("DLC_WMSIRENS\\SIRENPACK_ONE", false)
+
 k = nil
 vehName = nil
 lightingStage = 0
@@ -29,6 +31,14 @@ h_soundID_veh = {}
 curCleanupTime = 0
 
 local networkSessionActive = true
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+		SetVehicleRadioEnabled(vehicle, false)
+	end
+end)
 
 Citizen.CreateThread(function()
 
@@ -64,10 +74,8 @@ Citizen.CreateThread(function()
             DisableControlAction(0, 83, true) -- INPUT_VEH_NEXT_RADIO_TRACK 
             DisableControlAction(0, 81, true) -- INPUT_VEH_NEXT_RADIO
             DisableControlAction(0, 82, true) -- INPUT_VEH_PREV_RADIO
-            DisableControlAction(0, 85, true) -- INPUT_VEH_PREV_RADIO
 
-            SetVehRadioStation(GetVehiclePedIsUsing(PlayerPedId()), "OFF")
-            SetVehicleRadioEnabled(GetVehiclePedIsUsing(PlayerPedId()), false)
+
 
             if(GetLastInputMethod(0)) then
                 DisableControlAction(0, keyboard.stageChange, true)
@@ -183,6 +191,9 @@ Citizen.CreateThread(function()
                             end
                             if IsDisabledControlJustReleased(0, keyboard.siren.tone_three) then
                                 setSirenStateButton(3)
+                            end
+                            if IsDisabledControlJustReleased(0, keyboard.siren.tone_three) then
+                                setSirenStateButton(4)
                             end
                         end
                         if elsVehs[GetVehiclePedIsUsing(PlayerPedId())].stage == 2 then
@@ -931,4 +942,3 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
     end
 end)
-
