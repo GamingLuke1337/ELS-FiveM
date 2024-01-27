@@ -329,13 +329,6 @@ function setSirenState(veh, newstate)
                 m_soundID_veh[veh] = GetSoundId()
                 PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone3.audioString, veh, "DLC_WMSIRENS_SOUNDSET", 0, 0)
                 toggleSirenMute(veh, true)
-            
-            elseif newstate == 4 then
-
-                m_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone4.audioString, veh, "DLC_WMSIRENS_SOUNDSET", 0, 0)
-                toggleSirenMute(veh, true)
-                
             else
                 toggleSirenMute(veh, true)
             end             
