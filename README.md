@@ -5,7 +5,7 @@ By default there is a server side siren
 
 ## Note:
 - This script does not support making horn changes by default
- - If you want to customize the horn as well, please refer to the wiki
+  - If you want to customize the horn as well, please refer to the wiki
 
 ### Requirements
 - [WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
