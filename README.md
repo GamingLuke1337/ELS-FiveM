@@ -3,6 +3,10 @@ ELS for FiveM with [WM-ServerSirens](https://github.com/Walsheyy/WMServerSirens)
 
 By default there is a server side siren
 
+## Note:
+- This script does not support making horn changes by default
+ - If you want to customize the horn as well, please refer to the wiki
+
 ### Requirements
 - [WM-ServerSiren](https://github.com/Walsheyy/WMServerSirens)
 - ELS Car and `car_name.xml`
