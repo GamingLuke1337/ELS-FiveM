@@ -33,6 +33,13 @@ curCleanupTime = 0
 local networkSessionActive = true
 
 Citizen.CreateThread(function()
+    while true do
+        DistantCopCarSirens(false) -- Setting to false will disable the distant sirens
+        Citizen.Wait(400)
+    end
+end)
+
+Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
