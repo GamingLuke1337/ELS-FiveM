@@ -294,7 +294,12 @@ function setHornState(veh, newstate)
                         
             if newstate == 1 then
                 h_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(h_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.mainHorn.audioString, veh, getVehicleVCFInfo(veh).sounds.mainHorn.SoundSet, 0, 0)
+                if getVehicleVCFInfo(veh).sounds.mainHorn.SoundSet == nil then
+                    local SoundSet = 0
+                else
+                    local SoundSet = getVehicleVCFInfo(veh).sounds.mainHorn.SoundSet
+                end
+                PlaySoundFromEntity(h_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.mainHorn.audioString, veh, SoundSet, 0, 0)
             end             
                 
             h_horn_state[veh] = newstate
@@ -315,19 +320,34 @@ function setSirenState(veh, newstate)
             if newstate == 1 then
 
                 m_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone1.audioString, veh, getVehicleVCFInfo(veh).sounds.srnTone1.SoundSet, 0, 0)
+                if getVehicleVCFInfo(veh).sounds.srnTone1.SoundSet == nil then
+                    local SoundSet = 0
+                else
+                    local SoundSet = getVehicleVCFInfo(veh).sounds.srnTone1.SoundSet
+                end
+                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone1.audioString, veh, SoundSet, 0, 0)
                 toggleSirenMute(veh, true)
                 
             elseif newstate == 2 then
 
                 m_soundID_veh[veh] = GetSoundId() 
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone2.audioString, veh, getVehicleVCFInfo(veh).sounds.srnTone2.SoundSet, 0, 0)
+                if getVehicleVCFInfo(veh).sounds.srnTone2.SoundSet == nil then
+                    local SoundSet = 0
+                else
+                    local SoundSet = getVehicleVCFInfo(veh).sounds.srnTone2.SoundSet
+                end
+                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone2.audioString, veh, SoundSet, 0, 0)
                 toggleSirenMute(veh, true)
                 
             elseif newstate == 3 then
 
                 m_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone3.audioString, veh, getVehicleVCFInfo(veh).sounds.srnTone3.SoundSet, 0, 0)
+                if getVehicleVCFInfo(veh).sounds.srnTone3.SoundSet == nil then
+                    local SoundSet = 0
+                else
+                    local SoundSet = getVehicleVCFInfo(veh).sounds.srnTone3.SoundSet
+                end
+                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone3.audioString, veh, SoundSet, 0, 0)
                 toggleSirenMute(veh, true)
                 
             else
@@ -337,6 +357,27 @@ function setSirenState(veh, newstate)
             m_siren_state[veh] = newstate
         end
     end
+end
+
+state_indic = {}
+
+function TogIndicStateForVeh(vehicle, newstate)
+	if DoesEntityExist(vehicle) and not IsEntityDead(vehicle) then
+		if newstate == 0 then -- off
+			SetVehicleIndicatorLights(vehicle, 0, false) -- R
+			SetVehicleIndicatorLights(vehicle, 1, false) -- L
+		elseif newstate == 1 then -- left
+			SetVehicleIndicatorLights(vehicle, 0, false) -- R
+			SetVehicleIndicatorLights(vehicle, 1, true) -- L
+		elseif newstate == 2 then -- right
+			SetVehicleIndicatorLights(vehicle, 0, true) -- R
+			SetVehicleIndicatorLights(vehicle, 1, false) -- L
+		elseif newstate == 3 then -- hazard
+			SetVehicleIndicatorLights(vehicle, 0, true) -- R
+			SetVehicleIndicatorLights(vehicle, 1, true) -- L
+		end
+		state_indic[vehicle] = newstate
+	end
 end
 
 function RotAnglesToVec(rot) -- input vector3
