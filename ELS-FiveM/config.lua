@@ -38,9 +38,14 @@ keyboard = {
         secondary = 162, -- 8
         advisor = 161, -- 7
     },
+    hazard = {
+        hazard_key = 202, -- Backspace
+        left_signal_key = 84, -- [
+        right_signal_key = 83, -- ]
+    },
     warning = 246, -- Y
     secondary = 303, -- U
-    primary = 7, -- ?? 
+    primary = 7, -- ??
 }
 
 controller = {
