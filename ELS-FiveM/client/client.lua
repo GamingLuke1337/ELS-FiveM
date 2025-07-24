@@ -30,7 +30,7 @@ if IsPedInAnyVehicle(ped, false) then
     end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
     TriggerServerEvent("els:requestVehiclesUpdate")
 
@@ -355,7 +355,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if isVehicleELS and canControlELS then
 
@@ -421,7 +421,7 @@ end)
 local allowedPanel = false
 local panelTypeChecked = false
 panelTypeChanged = false
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if panelOffsetX ~= nil and panelOffsetY ~= nil then
             if panelEnabled and isVehicleELS then
@@ -829,7 +829,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         for k,v in pairs(elsVehs) do
             if(v ~= nil or DoesEntityExist(k)) then
@@ -879,7 +879,7 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         for k,v in pairs(elsVehs) do
             if v ~= nil and DoesEntityExist(k) and #(GetEntityCoords(k)-GetEntityCoords(GetPlayerPed(-1))) <= vehicleSyncDistance then
