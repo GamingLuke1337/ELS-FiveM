@@ -1,5 +1,7 @@
 els_Vehicles = {}
 
+RequestScriptAudioBank("DLC_WMSIRENS\\SIRENPACK_ONE", false)
+
 k = nil
 vehName = nil
 lightingStage = 0
@@ -29,6 +31,14 @@ h_soundID_veh = {}
 curCleanupTime = 0
 
 local networkSessionActive = true
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+		SetVehicleRadioEnabled(vehicle, false)
+	end
+end)
 
 Citizen.CreateThread(function()
 
@@ -64,10 +74,7 @@ Citizen.CreateThread(function()
             DisableControlAction(0, 83, true) -- INPUT_VEH_NEXT_RADIO_TRACK 
             DisableControlAction(0, 81, true) -- INPUT_VEH_NEXT_RADIO
             DisableControlAction(0, 82, true) -- INPUT_VEH_PREV_RADIO
-            DisableControlAction(0, 85, true) -- INPUT_VEH_PREV_RADIO
 
-            SetVehRadioStation(GetVehiclePedIsUsing(PlayerPedId()), "OFF")
-            SetVehicleRadioEnabled(GetVehiclePedIsUsing(PlayerPedId()), false)
 
             if(GetLastInputMethod(0)) then
                 DisableControlAction(0, keyboard.stageChange, true)
@@ -81,6 +88,33 @@ Citizen.CreateThread(function()
                 DisableControlAction(0, keyboard.siren.tone_two, true)
                 DisableControlAction(0, keyboard.siren.tone_three, true)
 
+                DisableControlAction(0, keyboard.hazard.hazard_key, true)
+                DisableControlAction(0, keyboard.hazard.left_signal_key, true)
+                DisableControlAction(0, keyboard.hazard.right_signal_key, true)
+
+                if IsDisabledControlJustReleased(0, keyboard.hazard.left_signal_key) then
+                    vehicle = GetVehiclePedIsUsing(PlayerPedId())
+                    if state_indic[vehicle] == 1 then
+                        TogIndicStateForVeh(vehicle, 0)
+                    else
+                        TogIndicStateForVeh(vehicle, 1)
+                    end
+                elseif IsDisabledControlJustReleased(0, keyboard.hazard.right_signal_key) then
+                    vehicle = GetVehiclePedIsUsing(PlayerPedId())
+                    if state_indic[vehicle] == 2 then
+                        TogIndicStateForVeh(vehicle, 0)
+                    else
+                        TogIndicStateForVeh(vehicle, 2)
+                    end
+                elseif IsDisabledControlJustReleased(0, keyboard.hazard.hazard_key) then
+                    vehicle = GetVehiclePedIsUsing(PlayerPedId())
+                    if state_indic[vehicle] == 3 then
+                        TogIndicStateForVeh(vehicle, 0)
+                    else
+                        TogIndicStateForVeh(vehicle, 3)
+                    end
+                end
+
                 if IsDisabledControlPressed(0, keyboard.modifyKey) then
 
                     if IsDisabledControlJustReleased(0, keyboard.guiKey) then
@@ -93,6 +127,8 @@ Citizen.CreateThread(function()
                             panelEnabled = true
                         end
                     end
+
+
 
                     if IsDisabledControlJustReleased(0, keyboard.stageChange) then
                         if getVehicleVCFInfo(GetVehiclePedIsUsing(PlayerPedId())).interface.activationType == "invert" or getVehicleVCFInfo(GetVehiclePedIsUsing(PlayerPedId())).interface.activationType == "euro" then
@@ -443,7 +479,7 @@ Citizen.CreateThread(function()
                             _DrawRect(0.85 + panelOffsetX, 0.835 + panelOffsetY, 0.245, 0.035, 0, 0, 0, 225, 0)
                             _DrawRect(0.85 + panelOffsetX, 0.835 + panelOffsetY, 0.24, 0.03, getVehicleVCFInfo(vehN).interface.headerColor.r, getVehicleVCFInfo(vehN).interface.headerColor.g, getVehicleVCFInfo(vehN).interface.headerColor.b, 225, 0)
                             Draw("MAIN", 0, 0, 0, 255, 0.745 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
-                            Draw("MRDAGREE SYSTEMS", 0, 0, 0, 255, 0.92 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("Test-ELS", 0, 0, 0, 255, 0.92 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
 
 
                             _DrawRect(0.78 + panelOffsetX, 0.835 + panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
