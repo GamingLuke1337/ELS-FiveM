@@ -12,21 +12,23 @@ elsVehs = {}
 
 m_siren_state = {}
 m_soundID_veh = {}
-dualEnable = {}
 d_siren_state = {}
 d_soundID_veh = {}
 h_horn_state = {}
 h_soundID_veh = {}
+local dualEnable = {}
+local vehIsReadySecondary = {}
+local vehicle = nil
 
 local networkSessionActive = true
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-		SetVehicleRadioEnabled(vehicle, false)
-	end
-end)
+if IsPedInAnyVehicle(ped, false) then
+    vehicle = GetVehiclePedIsIn(ped, false)
+    if vehicle ~= lastVehicle then
+        SetVehicleRadioEnabled(vehicle, false)
+        lastVehicle = vehicle
+    end
+end
 
 Citizen.CreateThread(function()
 
@@ -42,13 +44,6 @@ Citizen.CreateThread(function()
                 networkSessionActive = false
             else
                 networkSessionActive = true
-            end
-        end
-            
-        if false then
-            for i=0, 900 do
-                print("what?")
-                return print("such vitality, now trigger rebuild!")
             end
         end
 
