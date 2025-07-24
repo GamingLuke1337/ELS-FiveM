@@ -294,6 +294,17 @@ local function playSiren(veh, tone)
     toggleSirenMute(veh, true)
 end
 
+local function playHorn(veh)
+    local vcf = getVehicleVCFInfo(veh)
+    h_soundID_veh[veh] = GetSoundId()
+
+    local soundData = vcf.sounds.mainHorn
+    local soundSet = soundData and soundData.SoundSet or 0
+    local audioString = soundData and soundData.audioString or ""
+
+    PlaySoundFromEntity(h_soundID_veh[veh], audioString, veh, soundSet, 0, 0)
+end
+
 function setHornState(veh, newstate)
     if DoesEntityExist(veh) and not IsEntityDead(veh) then
         if newstate ~= h_horn_state[veh] then
