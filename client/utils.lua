@@ -381,18 +381,6 @@ function changeLightStage(state, advisor, PatternPrim, PatternSec)
     TriggerServerEvent("els:changeLightStage_s", state, advisor, PatternPrim, PatternSec)
 end
 
-function changeAdvisorPattern(pat)
-    TriggerServerEvent("els:changeAdvisorPattern_s", pat)
-end
-
-function changePrimaryPattern(pat)
-    TriggerServerEvent("els:changePrimaryPattern_s", pat)
-end
-
-function changeSecondaryPattern(pat)
-    TriggerServerEvent("els:changeSecondaryPattern_s", pat)
-end
-
 function checkCarHash(car)
     if car then
         for k in pairs(els_Vehicles) do
