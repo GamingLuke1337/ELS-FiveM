@@ -460,66 +460,75 @@ CreateThread(function()
 
                     if vehN ~= 0 then
                         if EGetConvarBool("els_developer") then
-                            Draw("~o~DEVELOPER MODE", 0, 0, 0, 255, 0.932 + Config.panelOffsetX, 0.856 + Config.panelOffsetY, 0.25,
-                                0.25, 1, true, 0)
+                            Draw("~o~DEVELOPER MODE", 0, 0, 0, 255, 0.932 + Config.panelOffsetX,
+                                0.856 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                         end
 
                         if (Config.panelType == "original") then
-                            _DrawRect(0.85 + Config.panelOffsetX, 0.89 + Config.panelOffsetY, 0.26, 0.16, 16, 16, 16, 225, 0)
+                            _DrawRect(0.85 + Config.panelOffsetX, 0.89 + Config.panelOffsetY, 0.26, 0.16, 16, 16, 16,
+                                225, 0)
 
-                            _DrawRect(0.85 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.245, 0.035, 0, 0, 0, 225, 0)
+                            _DrawRect(0.85 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.245, 0.035, 0, 0, 0,
+                                225, 0)
                             _DrawRect(0.85 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.24, 0.03,
                                 getVehicleVCFInfo(vehN).interface.headerColor.r,
                                 getVehicleVCFInfo(vehN).interface.headerColor.g,
                                 getVehicleVCFInfo(vehN).interface.headerColor.b, 225, 0)
-                            Draw("MAIN", 0, 0, 0, 255, 0.745 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1, true,
-                                0)
-                            Draw("Test-ELS", 0, 0, 0, 255, 0.92 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                true, 0)
+                            Draw("MAIN", 0, 0, 0, 255, 0.745 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
+                            Draw("Test-ELS", 0, 0, 0, 255, 0.92 + Config.panelOffsetX, 0.825 + Config.panelOffsetY,
+                                0.25, 0.25, 1, true, 0)
 
-                            _DrawRect(0.78 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
+                            _DrawRect(0.78 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.033, 0.025, 0, 0, 0,
+                                225, 0)
                             if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 1) then
                                 _DrawRect(0.78 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.g,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.b, 225, 0)
-                                Draw("S-1", 0, 0, 0, 255, 0.78 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                    true, 0)
+                                Draw("S-1", 0, 0, 0, 255, 0.78 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25,
+                                    0.25, 1, true, 0)
                             else
-                                _DrawRect(0.78 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
-                                Draw("S-1", 0, 0, 0, 255, 0.78 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                    true, 0)
+                                _DrawRect(0.78 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02, 186, 186,
+                                    186, 225, 0)
+                                Draw("S-1", 0, 0, 0, 255, 0.78 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25,
+                                    0.25, 1, true, 0)
                             end
 
-                            _DrawRect(0.815 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
+                            _DrawRect(0.815 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.033, 0.025, 0, 0, 0,
+                                225, 0)
                             if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 2) then
                                 _DrawRect(0.815 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.g,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.b, 225, 0)
-                                Draw("S-2", 0, 0, 0, 255, 0.815 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                    true, 0)
+                                Draw("S-2", 0, 0, 0, 255, 0.815 + Config.panelOffsetX, 0.825 + Config.panelOffsetY,
+                                    0.25, 0.25, 1, true, 0)
                             else
-                                _DrawRect(0.815 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
-                                Draw("S-2", 0, 0, 0, 255, 0.815 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                    true, 0)
+                                _DrawRect(0.815 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02, 186,
+                                    186, 186, 225, 0)
+                                Draw("S-2", 0, 0, 0, 255, 0.815 + Config.panelOffsetX, 0.825 + Config.panelOffsetY,
+                                    0.25, 0.25, 1, true, 0)
                             end
 
-                            _DrawRect(0.850 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
+                            _DrawRect(0.850 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.033, 0.025, 0, 0, 0,
+                                225, 0)
                             if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 3) then
                                 _DrawRect(0.850 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.g,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.b, 225, 0)
-                                Draw("S-3", 0, 0, 0, 255, 0.850 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                    true, 0)
+                                Draw("S-3", 0, 0, 0, 255, 0.850 + Config.panelOffsetX, 0.825 + Config.panelOffsetY,
+                                    0.25, 0.25, 1, true, 0)
                             else
-                                _DrawRect(0.850 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
-                                Draw("S-3", 0, 0, 0, 255, 0.850 + Config.panelOffsetX, 0.825 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                    true, 0)
+                                _DrawRect(0.850 + Config.panelOffsetX, 0.835 + Config.panelOffsetY, 0.03, 0.02, 186,
+                                    186, 186, 225, 0)
+                                Draw("S-3", 0, 0, 0, 255, 0.850 + Config.panelOffsetX, 0.825 + Config.panelOffsetY,
+                                    0.25, 0.25, 1, true, 0)
                             end
 
-                            _DrawRect(0.742 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
+                            _DrawRect(0.742 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0,
+                                225, 0)
                             if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
                                 if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].warning then
                                     _DrawRect(0.7421 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.026, 0.02,
@@ -529,23 +538,25 @@ CreateThread(function()
                                     Draw("E-" .. formatPatternNumber(advisorPatternSelectedIndex),
                                         getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                         getVehicleVCFInfo(vehN).interface.buttonColor.g,
-                                        getVehicleVCFInfo(vehN).interface.buttonColor.b, 255, 0.7423 + Config.panelOffsetX,
-                                        0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                                        getVehicleVCFInfo(vehN).interface.buttonColor.b, 255,
+                                        0.7423 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                                 else
-                                    _DrawRect(0.7421 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.026, 0.02, 186, 186, 186,
-                                        225, 0)
+                                    _DrawRect(0.7421 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.026, 0.02,
+                                        186, 186, 186, 225, 0)
                                     Draw("E-" .. formatPatternNumber(advisorPatternSelectedIndex), 255, 255, 255, 255,
                                         0.7423 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                                 end
                             else
-                                _DrawRect(0.7421 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.026, 0.02, 186, 186, 186, 225,
-                                    0)
+                                _DrawRect(0.7421 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.026, 0.02, 186,
+                                    186, 186, 225, 0)
                                 Draw("E-" .. formatPatternNumber(advisorPatternSelectedIndex), 255, 255, 255, 255,
                                     0.7423 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                             end
-                            Draw("WRN", 0, 0, 0, 255, 0.7423 + Config.panelOffsetX, 0.86 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("WRN", 0, 0, 0, 255, 0.7423 + Config.panelOffsetX, 0.86 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
 
-                            _DrawRect(0.774 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
+                            _DrawRect(0.774 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0,
+                                225, 0)
                             if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
                                 if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].secondary then
                                     _DrawRect(0.774 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02,
@@ -555,22 +566,25 @@ CreateThread(function()
                                     Draw("E-" .. formatPatternNumber(lightPatternSec),
                                         getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                         getVehicleVCFInfo(vehN).interface.buttonColor.g,
-                                        getVehicleVCFInfo(vehN).interface.buttonColor.b, 255, 0.774 + Config.panelOffsetX,
-                                        0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                                        getVehicleVCFInfo(vehN).interface.buttonColor.b, 255,
+                                        0.774 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                                 else
-                                    _DrawRect(0.774 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02, 186, 186, 186,
-                                        225, 0)
+                                    _DrawRect(0.774 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02,
+                                        186, 186, 186, 225, 0)
                                     Draw("E-" .. formatPatternNumber(lightPatternSec), 255, 255, 255, 255,
                                         0.774 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                                 end
                             else
-                                _DrawRect(0.774 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02, 186, 186, 186, 225, 0)
+                                _DrawRect(0.774 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02, 186,
+                                    186, 186, 225, 0)
                                 Draw("E-" .. formatPatternNumber(lightPatternSec), 255, 255, 255, 255,
                                     0.774 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                             end
-                            Draw("SEC", 0, 0, 0, 255, 0.774 + Config.panelOffsetX, 0.86 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("SEC", 0, 0, 0, 255, 0.774 + Config.panelOffsetX, 0.86 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
 
-                            _DrawRect(0.806 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
+                            _DrawRect(0.806 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0,
+                                225, 0)
                             if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
                                 if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].primary then
                                     _DrawRect(0.806 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02,
@@ -580,40 +594,52 @@ CreateThread(function()
                                     Draw("E-" .. formatPatternNumber(lightPatternPrim),
                                         getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                         getVehicleVCFInfo(vehN).interface.buttonColor.g,
-                                        getVehicleVCFInfo(vehN).interface.buttonColor.b, 255, 0.806 + Config.panelOffsetX,
-                                        0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                                        getVehicleVCFInfo(vehN).interface.buttonColor.b, 255,
+                                        0.806 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                                 else
-                                    _DrawRect(0.806 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02, 186, 186, 186,
-                                        225, 0)
+                                    _DrawRect(0.806 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02,
+                                        186, 186, 186, 225, 0)
                                     Draw("E-" .. formatPatternNumber(lightPatternPrim), 255, 255, 255, 255,
                                         0.806 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                                 end
                             else
-                                _DrawRect(0.806 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02, 186, 186, 186, 225, 0)
+                                _DrawRect(0.806 + Config.panelOffsetX, 0.871 + Config.panelOffsetY, 0.025, 0.02, 186,
+                                    186, 186, 225, 0)
                                 Draw("E-" .. formatPatternNumber(lightPatternPrim), 255, 255, 255, 255,
                                     0.806 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
                             end
-                            Draw("PRIM", 0, 0, 0, 255, 0.806 + Config.panelOffsetX, 0.86 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("PRIM", 0, 0, 0, 255, 0.806 + Config.panelOffsetX, 0.86 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
 
-                            _DrawRect(0.742 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
-                            _DrawRect(0.7421 + Config.panelOffsetX, 0.921 + Config.panelOffsetY, 0.026, 0.02, 186, 186, 186, 225, 0)
-                            Draw("--", 255, 255, 255, 255, 0.7423 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25, 0.25, 1,
-                                true, 0)
-                            Draw("HRN", 0, 0, 0, 255, 0.7423 + Config.panelOffsetX, 0.91 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            _DrawRect(0.742 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.028, 0.045, 0, 0, 0,
+                                225, 0)
+                            _DrawRect(0.7421 + Config.panelOffsetX, 0.921 + Config.panelOffsetY, 0.026, 0.02, 186, 186,
+                                186, 225, 0)
+                            Draw("--", 255, 255, 255, 255, 0.7423 + Config.panelOffsetX, 0.93 + Config.panelOffsetY,
+                                0.25, 0.25, 1, true, 0)
+                            Draw("HRN", 0, 0, 0, 255, 0.7423 + Config.panelOffsetX, 0.91 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
 
-                            _DrawRect(0.86 + Config.panelOffsetX, 0.911 + Config.panelOffsetY, 0.06, 0.09, 0, 0, 0, 225, 0)
+                            _DrawRect(0.86 + Config.panelOffsetX, 0.911 + Config.panelOffsetY, 0.06, 0.09, 0, 0, 0, 225,
+                                0)
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 11)) then
-                                _DrawRect(0.853 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 255, 255, 255, 225, 0)
-                                _DrawRect(0.866 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 255, 255, 255, 225, 0)
+                                _DrawRect(0.853 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 255,
+                                    255, 255, 225, 0)
+                                _DrawRect(0.866 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 255,
+                                    255, 255, 225, 0)
                             else
-                                _DrawRect(0.853 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 54, 54, 54, 225, 0)
-                                _DrawRect(0.866 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 54, 54, 54, 225, 0)
+                                _DrawRect(0.853 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 54, 54,
+                                    54, 225, 0)
+                                _DrawRect(0.866 + Config.panelOffsetX, 0.895 + Config.panelOffsetY, 0.01, 0.005, 54, 54,
+                                    54, 225, 0)
                             end
 
-                            _DrawRect(0.8365 + Config.panelOffsetX, 0.9 + Config.panelOffsetY, 0.0029, 0.015, 54, 54, 54, 225, 0)
+                            _DrawRect(0.8365 + Config.panelOffsetX, 0.9 + Config.panelOffsetY, 0.0029, 0.015, 54, 54,
+                                54, 225, 0)
 
-                            _DrawRect(0.882 + Config.panelOffsetX, 0.9 + Config.panelOffsetY, 0.0029, 0.015, 54, 54, 54, 225, 0)
+                            _DrawRect(0.882 + Config.panelOffsetX, 0.9 + Config.panelOffsetY, 0.0029, 0.015, 54, 54, 54,
+                                225, 0)
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 7)) then
                                 _DrawRect(0.848 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015,
@@ -621,7 +647,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[7].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[7].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.848 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.848 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if getVehicleVCFInfo(vehN).secl.type == "traf" or getVehicleVCFInfo(vehN).secl.type == "chp" then
@@ -631,8 +658,8 @@ CreateThread(function()
                                         getVehicleVCFInfo(vehN).extras[8].env_color.g,
                                         getVehicleVCFInfo(vehN).extras[8].env_color.b, 225, 0)
                                 else
-                                    _DrawRect(0.8598 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225,
-                                        0)
+                                    _DrawRect(0.8598 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015, 54,
+                                        54, 54, 225, 0)
                                 end
                             end
 
@@ -642,7 +669,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[9].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[9].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.872 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.872 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 1)) then
@@ -651,7 +679,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[1].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[1].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.84 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.84 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 2)) then
@@ -660,7 +689,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[2].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[2].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.853 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.853 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 3)) then
@@ -669,7 +699,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[3].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[3].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.866 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.866 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 4)) then
@@ -678,7 +709,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[4].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[4].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.879 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.879 + Config.panelOffsetX, 0.92 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 5)) then
@@ -687,7 +719,8 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[5].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[5].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.853 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.853 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
                             if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 6)) then
@@ -696,10 +729,12 @@ CreateThread(function()
                                     getVehicleVCFInfo(vehN).extras[6].env_color.g,
                                     getVehicleVCFInfo(vehN).extras[6].env_color.b, 225, 0)
                             else
-                                _DrawRect(0.866 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                                _DrawRect(0.866 + Config.panelOffsetX, 0.88 + Config.panelOffsetY, 0.01, 0.015, 54, 54,
+                                    54, 225, 0)
                             end
 
-                            _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.024, 0.023, 0, 0, 0, 225, 0)
+                            _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.024, 0.023, 0, 0, 0,
+                                225, 0)
                             if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
                                 if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].cruise then
                                     _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.022, 0.02,
@@ -707,35 +742,43 @@ CreateThread(function()
                                         getVehicleVCFInfo(vehN).interface.buttonColor.g,
                                         getVehicleVCFInfo(vehN).interface.buttonColor.b, 225, 0)
                                 else
-                                    _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.022, 0.02, 186, 186, 186, 225,
-                                        0)
+                                    _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.022, 0.02, 186,
+                                        186, 186, 225, 0)
                                 end
                             else
-                                _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.0215, 0.02, 186, 186, 186, 225, 0)
+                                _DrawRect(0.91 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.0215, 0.02, 186,
+                                    186, 186, 225, 0)
                             end
-                            Draw("CRS", 0, 0, 0, 255, 0.91 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("CRS", 0, 0, 0, 255, 0.91 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
 
-                            _DrawRect(0.935 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.024, 0.023, 0, 0, 0, 225, 0)
+                            _DrawRect(0.935 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.024, 0.023, 0, 0, 0,
+                                225, 0)
                             if IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 11) then
                                 _DrawRect(0.935 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.022, 0.02,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.g,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.b, 225, 0)
                             else
-                                _DrawRect(0.935 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.0215, 0.02, 186, 186, 186, 225, 0)
+                                _DrawRect(0.935 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.0215, 0.02, 186,
+                                    186, 186, 225, 0)
                             end
-                            Draw("TKD", 0, 0, 0, 255, 0.935 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("TKD", 0, 0, 0, 255, 0.935 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
 
-                            _DrawRect(0.96 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.024, 0.023, 0, 0, 0, 225, 0)
+                            _DrawRect(0.96 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.024, 0.023, 0, 0, 0,
+                                225, 0)
                             if IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 12) then
                                 _DrawRect(0.96 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.022, 0.02,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.r,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.g,
                                     getVehicleVCFInfo(vehN).interface.buttonColor.b, 225, 0)
                             else
-                                _DrawRect(0.96 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.0215, 0.02, 186, 186, 186, 225, 0)
+                                _DrawRect(0.96 + Config.panelOffsetX, 0.94 + Config.panelOffsetY, 0.0215, 0.02, 186,
+                                    186, 186, 225, 0)
                             end
-                            Draw("SCL", 0, 0, 0, 255, 0.96 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25, 0.25, 1, true, 0)
+                            Draw("SCL", 0, 0, 0, 255, 0.96 + Config.panelOffsetX, 0.93 + Config.panelOffsetY, 0.25,
+                                0.25, 1, true, 0)
                         elseif Config.panelType == "old" then
                             _DrawRect(0.85, 0.91, 0.24, 0.11, 0, 0, 0, 200, 0)
 
@@ -1035,18 +1078,6 @@ CreateThread(function()
                             for i = 1, 10 do
                                 setExtraState(k, i, 1)
                             end
-                        end
-
-                        if v.stage == 1 and v.advisorPattern <= 1 then
-                            runCHPPattern(k, v.advisorPattern, v.stage)
-                        end
-
-                        if v.stage == 2 and v.secPattern <= 3 then
-                            runCHPPattern(k, v.secPattern, v.stage)
-                        end
-
-                        if v.stage == 3 and v.primPattern <= 3 then
-                            runCHPPattern(k, v.primPattern, v.stage)
                         end
 
                     else

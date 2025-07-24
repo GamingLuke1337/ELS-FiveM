@@ -7,17 +7,21 @@ description 'A resource which provides extensive controls for Emergency Lighting
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'shared/*.lua'
+    'shared/main.lua'
 }
 
-client_script {
+client_scripts {
     'vcf.lua',
     'config.lua',
-    'client/**/*.lua'
+    'client/main.lua',
+    'client/patterns.lua',
+    'client/utils.lua'
 }
 
-server_script {
+server_scripts {
     'vcf.lua',
     'config.lua',
-    'server/**/*.lua'
+    'server/main.lua',
+    'server/update.lua',
+    'server/xml.lua'
 }
