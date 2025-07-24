@@ -35,6 +35,7 @@ end
 function parseVehData(xml, fileName)
 
     local a = {}
+    local elem = xml.root.el[i].kids[ex]
     fileName = string.sub(fileName, 1, -5)
 
     a.interface = {}
@@ -49,7 +50,6 @@ function parseVehData(xml, fileName)
     for i = 1, #xml.root.el do
         if (xml.root.el[i].name == "INTERFACE") then
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
                 if (xml.root.el[i].kids[ex].name == "LstgActivationType") then
                     a.interface.activationType = elem.kids[1].value
 
@@ -121,7 +121,6 @@ function parseVehData(xml, fileName)
         if (xml.root.el[i].name == "EOVERRIDE") then
             for ex = 1, #xml.root.el[i].kids do
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "EXTRA") then
-                    local elem = xml.root.el[i].kids[ex]
                     local extra = tonumber(string.sub(elem.name, -2))
                     a.extras[extra] = {}
                     if elem.attr['IsElsControlled'] == "true" then
@@ -221,7 +220,6 @@ function parseVehData(xml, fileName)
                 end
 
                 if (xml.root.el[i].kids[ex].name == "DisableAtLstg3") then
-                    local elem = xml.root.el[i].kids[ex]
                     if elem.kids[1].value == "true" then
                         a.cruise.DisableLstgThree = true
                     else
@@ -233,7 +231,6 @@ function parseVehData(xml, fileName)
 
         if (xml.root.el[i].name == "SOUNDS") then
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
                 if (xml.root.el[i].kids[ex].name == "MainHorn") then
                     a.sounds.mainHorn = {}
                     if elem.attr['InterruptsSiren'] == "true" then
@@ -327,14 +324,13 @@ function parseVehData(xml, fileName)
         end
 
         if (xml.root.el[i].name == "WRNL") then
+            elem = xml.root.el[i].kids[ex].el[inner]
             a.wrnl.type = string.lower(xml.root.el[i].attr['LightingFormat'])
             a.wrnl.PresetPatterns = {}
             a.wrnl.ForcedPatterns = {}
             for ex = 1, #xml.root.el[i].kids do
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
-                        local elem = xml.root.el[i].kids[ex].el[inner]
-
                         a.wrnl.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
                             a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = true
@@ -346,7 +342,6 @@ function parseVehData(xml, fileName)
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
-                        local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.wrnl.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled'] or "false") == "true" then
@@ -368,7 +363,6 @@ function parseVehData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
-                        local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.priml.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -381,7 +375,6 @@ function parseVehData(xml, fileName)
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
-                        local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.priml.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -402,7 +395,6 @@ function parseVehData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
-                        local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.secl.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -415,7 +407,6 @@ function parseVehData(xml, fileName)
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
-                        local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.secl.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -447,13 +438,13 @@ function parsePatternData(xml, fileName)
     fileName = string.sub(fileName, 1, -5)
 
     for i = 1, #xml.root.el do
+        elem = xml.root.el[i].kids[ex]
         if (xml.root.el[i].name == "PRIMARY") then
             primary.stages = {}
             primary.speed = tonumber(xml.root.el[i].attr["speed"])
             for ex = 1, #xml.root.el[i].kids do
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
-                    local elem = xml.root.el[i].kids[ex]
                     primary.stages[spot] = {}
                     if elem.attr['Extra1'] == "true" then
                         primary.stages[spot][1] = 0
@@ -528,7 +519,6 @@ function parsePatternData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
-                    local elem = xml.root.el[i].kids[ex]
                     secondary.stages[spot] = {}
                     if elem.attr['Extra1'] == "true" then
                         secondary.stages[spot][1] = 0
@@ -604,7 +594,6 @@ function parsePatternData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
-                    local elem = xml.root.el[i].kids[ex]
 
                     advisor.stages[spot] = {}
                     if elem.attr['Extra1'] == "true" then

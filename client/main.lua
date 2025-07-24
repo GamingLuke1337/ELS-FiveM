@@ -5,7 +5,6 @@ RequestScriptAudioBank("DLC_WMSIRENS\\SIRENPACK_ONE", false)
 advisorPatternSelectedIndex = 1
 
 lightPatternPrim = 0
-lightPatternsPrim = 1
 lightPatternSec = 1
 
 elsVehs = {}
@@ -13,7 +12,6 @@ elsVehs = {}
 m_siren_state = {}
 m_soundID_veh = {}
 d_siren_state = {}
-d_soundID_veh = {}
 h_horn_state = {}
 h_soundID_veh = {}
 local dualEnable = {}
@@ -366,38 +364,32 @@ CreateThread(function()
                     if Config.playButtonPressSounds then
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
-                    changePrimaryPatternMath(-1)
                 end
                 if IsDisabledControlPressed(0, Config.keyboard.pattern.secondary) then
                     if Config.playButtonPressSounds then
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
-                    changeSecondaryPatternMath(-1)
                 end
                 if IsDisabledControlPressed(0, Config.keyboard.pattern.advisor) then
                     if Config.playButtonPressSounds then
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
-                    changeAdvisorPatternMath(-1)
                 end
             else
                 if IsDisabledControlPressed(0, Config.keyboard.pattern.primary) then
                     if Config.playButtonPressSounds then
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
-                    changePrimaryPatternMath(1)
                 end
                 if IsDisabledControlPressed(0, Config.keyboard.pattern.secondary) then
                     if Config.playButtonPressSounds then
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
-                    changeSecondaryPatternMath(1)
                 end
                 if IsDisabledControlPressed(0, Config.keyboard.pattern.advisor) then
                     if Config.playButtonPressSounds then
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
-                    changeAdvisorPatternMath(1)
                 end
             end
         end
@@ -1079,7 +1071,17 @@ CreateThread(function()
                                 setExtraState(k, i, 1)
                             end
                         end
+                        if v.stage == 1 and v.advisorPattern <= 1 then
+                            runCHPPattern(k, v.advisorPattern, v.stage)
+                        end
 
+                        if v.stage == 2 and v.secPattern <= 3 then
+                            runCHPPattern(k, v.secPattern, v.stage)
+                        end
+
+                        if v.stage == 3 and v.primPattern <= 3 then
+                            runCHPPattern(k, v.primPattern, v.stage)
+                        end
                     else
 
                         if not v.warning then
