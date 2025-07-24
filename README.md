@@ -2,28 +2,24 @@
 
 This project integrates the Emergency Lighting System (ELS) for FiveM, using server-side sirens powered by [WM-ServerSirens](https://github.com/Walsheyy/WMServerSirens).
 
----
 
 ## ⚠️ Note
 
 * This script **does not support horn customization by default.**
   → If you want to customize the horn, please check the [wiki guide](https://github.com/tah5882/ELS-FiveM/wiki/How-to-customize-your-horn).
 
----
 
 ## ✅ Requirements
 
 * [WM-ServerSirens](https://github.com/Walsheyy/WMServerSirens)
 * ELS-compatible vehicle and corresponding `car_name.xml`
 
----
 
 ## 🎮 Default Controls
 
 👉 Full controls overview here:
 [📖 Controls Wiki](https://github.com/MrDaGree/ELS-FiveM/wiki/Controls)
 
----
 
 ## 📦 Installation Guide
 
@@ -38,7 +34,6 @@ This project integrates the Emergency Lighting System (ELS) for FiveM, using ser
 5. Add any VCF files into the `vcf` folder so they can be detected.
 6. Enjoy!
 
----
 
 ## ⚙️ Convars (Server Configuration Variables)
 
