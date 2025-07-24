@@ -9,7 +9,8 @@ shared_scripts {
     '@ox_lib/init.lua',
     'shared/main.lua',
     'config.lua',
-    'vcf.lua'
+    'vcf.lua',
+    'lang/*.lua'
 }
 
 client_scripts {
@@ -24,3 +25,5 @@ server_scripts {
     'server/update.lua',
     'server/xml.lua'
 }
+
+dependency 'ox_lib'

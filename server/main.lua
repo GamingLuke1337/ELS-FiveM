@@ -330,9 +330,9 @@ function parseVehData(xml, fileName)
             a.wrnl.PresetPatterns = {}
             a.wrnl.ForcedPatterns = {}
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for _ = 1, #xml.root.el[i].kids[ex].el do
+                        local elem = xml.root.el[i].kids[ex]
                         a.wrnl.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
                             a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = true
@@ -344,7 +344,7 @@ function parseVehData(xml, fileName)
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
                     for _ = 1, #xml.root.el[i].kids[ex].el do
-
+                        local elem = xml.root.el[i].kids[ex]
                         a.wrnl.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled'] or "false") == "true" then
                             a.wrnl.ForcedPatterns[string.lower(elem.name)].enabled = true
@@ -442,7 +442,6 @@ function parsePatternData(xml, fileName)
     fileName = string.sub(fileName, 1, -5)
 
     for i = 1, #xml.root.el do
-        elem = xml.root.el[i].kids[ex]
         if (xml.root.el[i].name == "PRIMARY") then
             primary.stages = {}
             primary.speed = tonumber(xml.root.el[i].attr["speed"])

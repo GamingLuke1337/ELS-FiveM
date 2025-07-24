@@ -37,8 +37,8 @@ CreateThread(function()
         if EGetConvarBool("els_developer") then
 
             -- a temporary condition for split session handling
-            if not NetworkIsSessionActive() then
-                print("Not in network session, shit will significantly fuck up, so we're preventing you from using ELS.")
+            if NetworkIsSessionActive() then
+                notify(_U('network'))
                 networkSessionActive = false
             else
                 networkSessionActive = true
@@ -401,7 +401,7 @@ local log = false
 RegisterCommand('tlog', function()
     log = not log
     if log then
-        print('now logging stuff')
+        notify('now logging stuff')
     end
 end)
 
@@ -409,8 +409,8 @@ CreateThread(function()
     while true do
         Wait(500)
         if log then
-            print("elsVehs:" .. json.encode(elsVehs))
-            print("els_Vehicles:" .. json.encode(els_Vehicles))
+            notify("elsVehs:" .. json.encode(elsVehs))
+            notify("els_Vehicles:" .. json.encode(els_Vehicles))
         end
     end
 end)
@@ -992,7 +992,7 @@ CreateThread(function()
                     for i = 11, 12 do
                         if (not IsEntityDead(k) and DoesEntityExist(k)) then
                             if (els_Vehicles[vehN] == nil or els_Vehicles[vehN].extras == nil) then
-                                debugPrint("Index for current vehicle (" .. vehN .. ") was nil (invalid), returning.",
+                                debugnotify("Index for current vehicle (" .. vehN .. ") was nil (invalid), returning.",
                                     true, true)
                                 return
                             end
@@ -1045,7 +1045,7 @@ CreateThread(function()
 
                 local vcfInfo = getVehicleVCFInfo(k)
                 if not vcfInfo then
-                    debugPrint("Insufficient VCF information obtained for " .. k .. ", returning.", true, true)
+                    debugnotify("Insufficient VCF information obtained for " .. k .. ", returning.", true, true)
                     goto continue
                 end
 

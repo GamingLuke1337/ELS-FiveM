@@ -2,6 +2,9 @@ Config = {}
 
 Config.update = true
 
+Config.lang = "en" -- en, de
+Config.notify = "ox" -- ox, esx
+
 Config.playButtonPressSounds = true
 
 Config.vehicleSyncDistance = 150
