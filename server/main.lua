@@ -35,9 +35,10 @@ end
 function parseVehData(xml, fileName)
 
     local a = {}
-    local elem = xml.root.el[i].kids[ex]
     fileName = string.sub(fileName, 1, -5)
-
+    local i = 1
+    local ex = 1
+    local elem = xml.root.el[i].kids[ex]
     a.interface = {}
     a.extras = {}
     a.misc = {}
@@ -322,9 +323,10 @@ function parseVehData(xml, fileName)
                 end
             end
         end
+        
+        elem = xml.root.el[i].kids[ex].el[inner]
 
         if (xml.root.el[i].name == "WRNL") then
-            elem = xml.root.el[i].kids[ex].el[inner]
             a.wrnl.type = string.lower(xml.root.el[i].attr['LightingFormat'])
             a.wrnl.PresetPatterns = {}
             a.wrnl.ForcedPatterns = {}
