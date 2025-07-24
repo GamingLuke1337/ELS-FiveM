@@ -393,18 +393,9 @@ function changeSecondaryPattern(pat)
     TriggerServerEvent("els:changeSecondaryPattern_s", pat)
 end
 
-function checkCar(car)
-    if car then
-        carModel = GetEntityModel(car)
-        carName = GetDisplayNameFromVehicleModel(carModel)
-
-        return carName
-    end
-end
-
 function checkCarHash(car)
     if car then
-        for k, v in pairs(els_Vehicles) do
+        for k in pairs(els_Vehicles) do
             if GetEntityModel(car) == GetHashKey(k) then
                 return k
             end
@@ -477,7 +468,7 @@ end
 
 function sirenCleanup()
     CreateThread(function()
-        for vehicle, state in pairs(m_siren_state) do
+        for vehicle in pairs(m_siren_state) do
             if m_soundID_veh[vehicle] ~= nil then
                 if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
                     StopSound(m_soundID_veh[vehicle])
@@ -488,7 +479,7 @@ function sirenCleanup()
             end
         end
 
-        for vehicle, state in pairs(d_siren_state) do
+        for vehicle in pairs(d_siren_state) do
             if d_soundID_veh[vehicle] ~= nil then
                 if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
                     StopSound(d_soundID_veh[vehicle])
@@ -522,14 +513,8 @@ function vehicleLightCleanup()
     end)
 end
 
-function LghtSoundCleaner()
-    vehicleLightCleanup()
-    hornCleanup()
-    sirenCleanup()
-end
-
 function changePrimaryPatternMath(way)
-    if playButtonPressSounds then
+    if Config.playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
     local primMax = getNumberOfPrimaryPatterns(GetVehiclePedIsUsing(GetPlayerPed(-1)))
@@ -555,7 +540,7 @@ function changePrimaryPatternMath(way)
 end
 
 function changeSecondaryPatternMath(way)
-    if playButtonPressSounds then
+    if Config.playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
     local primMax = getNumberOfSecondaryPatterns(GetVehiclePedIsUsing(GetPlayerPed(-1)))
@@ -577,7 +562,7 @@ function changeSecondaryPatternMath(way)
 end
 
 function changeAdvisorPatternMath(way)
-    if playButtonPressSounds then
+    if Config.playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
 
@@ -601,7 +586,7 @@ function changeAdvisorPatternMath(way)
 end
 
 function setSirenStateButton(state)
-    if playButtonPressSounds then
+    if Config.playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
     if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= state then
@@ -612,7 +597,7 @@ function setSirenStateButton(state)
 end
 
 function upOneStage()
-    if playButtonPressSounds then
+    if Config.playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
     local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
@@ -647,7 +632,7 @@ function upOneStage()
 end
 
 function downOneStage()
-    if playButtonPressSounds then
+    if Config.playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
     local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
@@ -679,19 +664,6 @@ function downOneStage()
             TriggerServerEvent("els:setDualSiren_s", false)
         end
     end
-end
-
-function displayScreenKeyboard(text)
-    HideHudAndRadarThisFrame()
-    DisplayOnscreenKeyboard(1, text, "", "", "", "", "", 60)
-    while UpdateOnscreenKeyboard() == 0 do
-        DisableAllControlActions(0)
-        Wait(0)
-    end
-    if (not GetOnscreenKeyboardResult()) then
-        return nil
-    end
-    return GetOnscreenKeyboardResult()
 end
 
 function formatPatternNumber(num)
@@ -761,7 +733,7 @@ end)
 RegisterNetEvent("els:setPanelType")
 AddEventHandler("els:setPanelType", function(pType)
     local validPanel = false
-    for _, panel in pairs(allowedPanelTypes) do
+    for _, panel in pairs(Config.allowedPanelTypes) do
         if panel == pType then
             validPanel = true
             break
@@ -795,11 +767,4 @@ _G.Citizen.Trace = function(data)
     if string.match(data, "SCRIPT ERROR") then
         TriggerServerEvent("els:catchError", data, current_vehicle)
     end
-end
-
-if false then
-    print("i guess there is a limit for the amount of changes/additions" ..
-              "before a new build is published, so, i guess i should just keep" ..
-              "writing and hope for the best, maybe trick this shit into thinking" ..
-              "this nonsensical message is actual code. is this enough?")
 end

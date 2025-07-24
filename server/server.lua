@@ -1,49 +1,28 @@
 vehicleInfoTable = {}
 patternInfoTable = {}
 
-lib.versionCheck('GamingLuke1337/ELS-FiveM')
-
 RegisterCommand('els', function(source, args)
     local function notify(plr, text)
         assert(type(plr) == "number", "Expected type 'number' for parameter #1 in 'notify'.")
+
         if plr == 0 then
             return print(text)
         end
 
-        assert(type(GetPlayerEP(plr)) == "string", "Invalid player passed for parameter #1 in 'notify'.")
+        if GetPlayerName(plr) == nil then
+            error("Invalid player passed for parameter #1 in 'notify'.")
+        end
 
         TriggerClientEvent("els:notify", plr, text)
     end
-    if args[1] == 'version' then
-        PerformHttpRequest(latestVersionPath, function(err, response, headers)
-            local data = json.decode(response)
-            local data_verson = data?.version
-            local thisVersion = tonumber(data_verson)
 
-            if source > 0 then
-                return notify(source, "~r~ELS~s~~n~Version " .. curVerCol(thisVersion) .. curVersion)
-            end
-
-            local message
-            if curVersion ~= data_verson and curVersion < thisVersion then
-                message = "You are currently running an outdated version of [ " .. GetCurrentResourceName() .. " ]. Your version [ " .. curVersion .. " ]. Newest version: [ " .. data_verson .. " ]."
-            elseif curVersion > thisVersion then
-                message = "Um, what? Your version of ELS-FiveM is higher than the current version. What?"
-            else
-                message = "Your version of [ " .. GetCurrentResourceName() .. " ] is up to date! Current version: [ " .. curVersion .. " ]."
-            end
-
-            if message then
-                return print("ELS-FiveM (" .. GetCurrentResourceName() .. "): " .. message)
-            end
-
-            return print("ELS-FiveM (" .. GetCurrentResourceName() .. "): Could not find any relationship between the latest version and the version you are running.")
-        end, "GET", "", {version = 'this'})
-    elseif args[1] == 'panel' then
-        if source == 0 then return end
+    if args[1] == 'panel' then
+        if source == 0 then
+            return
+        end
         if not args[2] then
             TriggerClientEvent("chat:addMessage", source, {
-                args = { "ELS-FiveM", "Please input a panel type! " },
+                args = {"ELS-FiveM", "Please input a panel type! "},
                 color = {13, 161, 200}
             })
             return
@@ -51,47 +30,20 @@ RegisterCommand('els', function(source, args)
 
         TriggerClientEvent('els:setPanelType', source, args[2])
     elseif not args[1] or args[1] == 'help' then
-        TriggerClientEvent("els:notify", source, "~r~ELS~s~~n~Version " .. curVerCol(latestVersion) .. curVersion)
-        TriggerClientEvent("els:notify", source, "~b~Sub-Commands~s~~n~" .. "~p~panel~s~ - Sets the panel type, options: " .. table.concat(allowedPanelTypes, ", ") .. "~n~~p~version~s~ - Shows current version and if the owner should update or not.~n~~p~help~s~ - Displays this notification.")
+        -- TriggerClientEvent("els:notify", source, "~r~ELS~s~~n~Version " .. curVerCol(latestVersion) .. curVersion)
+        TriggerClientEvent("els:notify", source,
+            "~b~Sub-Commands~s~~n~" .. "~p~panel~s~ - Sets the panel type, options: " ..
+                table.concat(Config.allowedPanelTypes, ", ") ..
+                "~n~~p~version~s~ - Shows current version and if the owner should update or not.~n~~p~help~s~ - Displays this notification.")
     end
 end)
 
-RegisterNetEvent("els:playerSpawned")
-AddEventHandler("els:playerSpawned", function()
-    if not warnOnJoin() then return end
-
-    if curVersion < latestVersion then
-        TriggerClientEvent("els:notify", source, "~r~ELS-FiveM~s~~n~Outdated version! Please update as soon as possible.")
-    elseif curVersion > latestVersion then
-        TriggerClientEvent("els:notify", source, "~o~ELS-FiveM~s~~n~The current version is higher than latest! Please downgrade or check for updates.")
-    else
+function string_upper(str)
+    if not str or type(str) ~= "string" then
         return
     end
-end)
 
-local function processXml(el)
-    local v = {}
-    local text
-
-    for _,kid in ipairs(el.kids) do
-        if kid.type == 'text' then
-            text = kid.value
-        elseif kid.type == 'element' then
-            if not v[kid.name] then
-                v[kid.name] = {}
-            end
-
-            table.insert(v[kid.name], processXml(kid))
-        end
-    end
-
-    v._ = el.attr
-
-    if #el.attr == 0 and #el.el == 0 then
-        v = text
-    end
-
-    return v
+    return string.upper(str)
 end
 
 function parseVehData(xml, fileName)
@@ -99,7 +51,6 @@ function parseVehData(xml, fileName)
     local a = {}
     fileName = string.sub(fileName, 1, -5)
 
-    a = {}
     a.interface = {}
     a.extras = {}
     a.misc = {}
@@ -109,16 +60,15 @@ function parseVehData(xml, fileName)
     a.priml = {}
     a.secl = {}
 
-    for i=1,#xml.root.el do
-        if(xml.root.el[i].name == "INTERFACE") then
-            for ex=1,#xml.root.el[i].kids do
-                if(xml.root.el[i].kids[ex].name== "LstgActivationType") then
-                    local elem = xml.root.el[i].kids[ex]
+    for i = 1, #xml.root.el do
+        if (xml.root.el[i].name == "INTERFACE") then
+            local elem = xml.root.el[i].kids[ex]
+            for ex = 1, #xml.root.el[i].kids do
+                if (xml.root.el[i].kids[ex].name == "LstgActivationType") then
                     a.interface.activationType = elem.kids[1].value
 
                 end
-                if(xml.root.el[i].kids[ex].name== "InfoPanelHeaderColor") then
-                    local elem = xml.root.el[i].kids[ex]
+                if (xml.root.el[i].kids[ex].name == "InfoPanelHeaderColor") then
                     a.interface.headerColor = {}
 
                     a.interface.headerColor['r'] = 40
@@ -141,7 +91,7 @@ function parseVehData(xml, fileName)
                         a.interface.headerColor['b'] = 0
                     end
                 end
-                if(xml.root.el[i].kids[ex].name== "InfoPanelButtonLightColor") then
+                if (xml.root.el[i].kids[ex].name == "InfoPanelButtonLightColor") then
                     local elem = xml.root.el[i].kids[ex]
                     a.interface.buttonColor = {}
 
@@ -183,9 +133,9 @@ function parseVehData(xml, fileName)
             end
         end
 
-        if(xml.root.el[i].name == "EOVERRIDE") then
-            for ex=1,#xml.root.el[i].kids do
-                if(string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "EXTRA") then
+        if (xml.root.el[i].name == "EOVERRIDE") then
+            for ex = 1, #xml.root.el[i].kids do
+                if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "EXTRA") then
                     local elem = xml.root.el[i].kids[ex]
                     local extra = tonumber(string.sub(elem.name, -2))
                     a.extras[extra] = {}
@@ -205,7 +155,7 @@ function parseVehData(xml, fileName)
                     a.extras[extra].env_color['g'] = 0
                     a.extras[extra].env_color['b'] = 0
 
-                    if(elem.attr['AllowEnvLight'] == "true") then
+                    if (elem.attr['AllowEnvLight'] == "true") then
                         a.extras[extra].env_light = true
                         a.extras[extra].env_pos = {}
                         a.extras[extra].env_pos['x'] = tonumber(elem.attr['OffsetX'])
@@ -240,14 +190,14 @@ function parseVehData(xml, fileName)
             end
         end
 
-        if(xml.root.el[i].name == "MISC") then
-            for ex=1,#xml.root.el[i].kids do
-                if(xml.root.el[i].kids[ex].name == "ArrowboardType") then
+        if (xml.root.el[i].name == "MISC") then
+            for ex = 1, #xml.root.el[i].kids do
+                if (xml.root.el[i].kids[ex].name == "ArrowboardType") then
                     local elem = xml.root.el[i].kids[ex]
                     a.misc.arrowboardType = elem.kids[1].value
                 end
 
-                if(xml.root.el[i].kids[ex].name == "UseSteadyBurnLights") then
+                if (xml.root.el[i].kids[ex].name == "UseSteadyBurnLights") then
                     local elem = xml.root.el[i].kids[ex]
                     if elem.kids[1].value == "true" then
                         a.misc.usesteadyburnlights = true
@@ -256,24 +206,40 @@ function parseVehData(xml, fileName)
                     end
                 end
 
-                if(xml.root.el[i].kids[ex].name == "DfltSirenLtsActivateAtLstg") then
+                if (xml.root.el[i].kids[ex].name == "DfltSirenLtsActivateAtLstg") then
                     local elem = xml.root.el[i].kids[ex]
                     a.misc.dfltsirenltsactivateatlstg = tonumber(elem.kids[1].value)
                 end
             end
         end
 
-        if(xml.root.el[i].name == "CRUISE") then
-            for ex=1,#xml.root.el[i].kids do
+        if (xml.root.el[i].name == "CRUISE") then
+            for ex = 1, #xml.root.el[i].kids do
                 local elem = xml.root.el[i].kids[ex]
-                if(xml.root.el[i].kids[ex].name== "UseExtras") then
-                    if elem.attr['Extra1'] == "true" then a.cruise[1] = 0 else a.cruise[1] = 1 end
-                    if elem.attr['Extra2'] == "true" then a.cruise[2] = 0 else a.cruise[2] = 1 end
-                    if elem.attr['Extra3'] == "true" then a.cruise[3] = 0 else a.cruise[3] = 1 end
-                    if elem.attr['Extra4'] == "true" then a.cruise[4] = 0 else a.cruise[4] = 1 end
+                if (xml.root.el[i].kids[ex].name == "UseExtras") then
+                    if elem.attr['Extra1'] == "true" then
+                        a.cruise[1] = 0
+                    else
+                        a.cruise[1] = 1
+                    end
+                    if elem.attr['Extra2'] == "true" then
+                        a.cruise[2] = 0
+                    else
+                        a.cruise[2] = 1
+                    end
+                    if elem.attr['Extra3'] == "true" then
+                        a.cruise[3] = 0
+                    else
+                        a.cruise[3] = 1
+                    end
+                    if elem.attr['Extra4'] == "true" then
+                        a.cruise[4] = 0
+                    else
+                        a.cruise[4] = 1
+                    end
                 end
 
-                if(xml.root.el[i].kids[ex].name== "DisableAtLstg3") then
+                if (xml.root.el[i].kids[ex].name == "DisableAtLstg3") then
                     local elem = xml.root.el[i].kids[ex]
                     if elem.kids[1].value == "true" then
                         a.cruise.DisableLstgThree = true
@@ -284,138 +250,198 @@ function parseVehData(xml, fileName)
             end
         end
 
-        if(xml.root.el[i].name == "SOUNDS") then
-            for ex=1,#xml.root.el[i].kids do
+        if (xml.root.el[i].name == "SOUNDS") then
+            for ex = 1, #xml.root.el[i].kids do
                 local elem = xml.root.el[i].kids[ex]
-                if(xml.root.el[i].kids[ex].name== "MainHorn") then
+                if (xml.root.el[i].kids[ex].name == "MainHorn") then
                     a.sounds.mainHorn = {}
-                    if elem.attr['InterruptsSiren'] == "true" then a.sounds.mainHorn.interrupt = true else a.sounds.mainHorn.interrupt = false end
+                    if elem.attr['InterruptsSiren'] == "true" then
+                        a.sounds.mainHorn.interrupt = true
+                    else
+                        a.sounds.mainHorn.interrupt = false
+                    end
                     a.sounds.mainHorn.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "ManTone1") then
+                if (xml.root.el[i].kids[ex].name == "ManTone1") then
                     a.sounds.manTone1 = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.manTone1.allowUse = true else a.sounds.manTone1.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.manTone1.allowUse = true
+                    else
+                        a.sounds.manTone1.allowUse = false
+                    end
                     a.sounds.manTone1.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "ManTone2") then
+                if (xml.root.el[i].kids[ex].name == "ManTone2") then
                     a.sounds.manTone2 = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.manTone2.allowUse = true else a.sounds.manTone2.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.manTone2.allowUse = true
+                    else
+                        a.sounds.manTone2.allowUse = false
+                    end
                     a.sounds.manTone2.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "SrnTone1") then
+                if (xml.root.el[i].kids[ex].name == "SrnTone1") then
                     a.sounds.srnTone1 = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.srnTone1.allowUse = true else a.sounds.srnTone1.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.srnTone1.allowUse = true
+                    else
+                        a.sounds.srnTone1.allowUse = false
+                    end
                     a.sounds.srnTone1.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "SrnTone2") then
+                if (xml.root.el[i].kids[ex].name == "SrnTone2") then
                     a.sounds.srnTone2 = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.srnTone2.allowUse = true else a.sounds.srnTone2.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.srnTone2.allowUse = true
+                    else
+                        a.sounds.srnTone2.allowUse = false
+                    end
                     a.sounds.srnTone2.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "SrnTone3") then
+                if (xml.root.el[i].kids[ex].name == "SrnTone3") then
                     a.sounds.srnTone3 = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.srnTone3.allowUse = true else a.sounds.srnTone3.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.srnTone3.allowUse = true
+                    else
+                        a.sounds.srnTone3.allowUse = false
+                    end
                     a.sounds.srnTone3.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "SrnTone4") then
+                if (xml.root.el[i].kids[ex].name == "SrnTone4") then
                     a.sounds.srnTone4 = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.srnTone4.allowUse = true else a.sounds.srnTone4.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.srnTone4.allowUse = true
+                    else
+                        a.sounds.srnTone4.allowUse = false
+                    end
                     a.sounds.srnTone4.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "AuxSiren") then
+                if (xml.root.el[i].kids[ex].name == "AuxSiren") then
                     a.sounds.auxSiren = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.auxSiren.allowUse = true else a.sounds.auxSiren.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.auxSiren.allowUse = true
+                    else
+                        a.sounds.auxSiren.allowUse = false
+                    end
                     a.sounds.auxSiren.audioString = elem.attr['AudioString']
                 end
 
-                if(xml.root.el[i].kids[ex].name== "PanicMde") then
+                if (xml.root.el[i].kids[ex].name == "PanicMde") then
                     a.sounds.panicMode = {}
-                    if elem.attr['AllowUse'] == "true" then a.sounds.panicMode.allowUse = true else a.sounds.panicMode.allowUse = false end
+                    if elem.attr['AllowUse'] == "true" then
+                        a.sounds.panicMode.allowUse = true
+                    else
+                        a.sounds.panicMode.allowUse = false
+                    end
                     a.sounds.panicMode.audioString = elem.attr['AudioString']
                 end
             end
         end
 
-        if(xml.root.el[i].name == "WRNL") then
+        if (xml.root.el[i].name == "WRNL") then
             a.wrnl.type = string.lower(xml.root.el[i].attr['LightingFormat'])
             a.wrnl.PresetPatterns = {}
             a.wrnl.ForcedPatterns = {}
-            for ex=1,#xml.root.el[i].kids do
-                if(xml.root.el[i].kids[ex].name == "PresetPatterns") then
-                    for inner=1,#xml.root.el[i].kids[ex].el do
+            for ex = 1, #xml.root.el[i].kids do
+                if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
+                    for inner = 1, #xml.root.el[i].kids[ex].el do
                         local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.wrnl.PresetPatterns[string.lower(elem.name)] = {}
-                        if string.lower(elem.attr['Enabled']) == "true" then a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = true else a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = false end
+                        if string.lower(elem.attr['Enabled']) == "true" then
+                            a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = true
+                        else
+                            a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = false
+                        end
                         a.wrnl.PresetPatterns[string.lower(elem.name)].pattern = tonumber(elem.attr['Pattern'])
                     end
                 end
-                if(xml.root.el[i].kids[ex].name == "ForcedPatterns") then
-                    for inner=1,#xml.root.el[i].kids[ex].el do
+                if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
+                    for inner = 1, #xml.root.el[i].kids[ex].el do
                         local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.wrnl.ForcedPatterns[string.lower(elem.name)] = {}
-                        if string.lower(elem.attr['Enabled'] or "false") == "true" then a.wrnl.ForcedPatterns[string.lower(elem.name)].enabled = true else a.wrnl.ForcedPatterns[string.lower(elem.name)].enabled = false end
+                        if string.lower(elem.attr['Enabled'] or "false") == "true" then
+                            a.wrnl.ForcedPatterns[string.lower(elem.name)].enabled = true
+                        else
+                            a.wrnl.ForcedPatterns[string.lower(elem.name)].enabled = false
+                        end
                         a.wrnl.ForcedPatterns[string.lower(elem.name)].pattern = tonumber(elem.attr['Pattern'])
                     end
                 end
             end
         end
 
-        if(xml.root.el[i].name == "PRML") then
+        if (xml.root.el[i].name == "PRML") then
             a.priml.type = string.lower(xml.root.el[i].attr['LightingFormat'])
             a.priml.ExtrasActiveAtLstg2 = string.lower(xml.root.el[i].attr['ExtrasActiveAtLstg2'])
             a.priml.PresetPatterns = {}
             a.priml.ForcedPatterns = {}
-            for ex=1,#xml.root.el[i].kids do
-                if(xml.root.el[i].kids[ex].name == "PresetPatterns") then
-                    for inner=1,#xml.root.el[i].kids[ex].el do
+            for ex = 1, #xml.root.el[i].kids do
+                if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
+                    for inner = 1, #xml.root.el[i].kids[ex].el do
                         local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.priml.PresetPatterns[string.lower(elem.name)] = {}
-                        if string.lower(elem.attr['Enabled']) == "true" then a.priml.PresetPatterns[string.lower(elem.name)].enabled = true else a.priml.PresetPatterns[string.lower(elem.name)].enabled = false end
+                        if string.lower(elem.attr['Enabled']) == "true" then
+                            a.priml.PresetPatterns[string.lower(elem.name)].enabled = true
+                        else
+                            a.priml.PresetPatterns[string.lower(elem.name)].enabled = false
+                        end
                         a.priml.PresetPatterns[string.lower(elem.name)].pattern = tonumber(elem.attr['Pattern'])
                     end
                 end
-                if(xml.root.el[i].kids[ex].name == "ForcedPatterns") then
-                    for inner=1,#xml.root.el[i].kids[ex].el do
+                if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
+                    for inner = 1, #xml.root.el[i].kids[ex].el do
                         local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.priml.ForcedPatterns[string.lower(elem.name)] = {}
-                        if string.lower(elem.attr['Enabled']) == "true" then a.priml.ForcedPatterns[string.lower(elem.name)].enabled = true else a.priml.ForcedPatterns[string.lower(elem.name)].enabled = false end
+                        if string.lower(elem.attr['Enabled']) == "true" then
+                            a.priml.ForcedPatterns[string.lower(elem.name)].enabled = true
+                        else
+                            a.priml.ForcedPatterns[string.lower(elem.name)].enabled = false
+                        end
                         a.priml.ForcedPatterns[string.lower(elem.name)].pattern = tonumber(elem.attr['Pattern'])
                     end
                 end
             end
         end
 
-        if(xml.root.el[i].name == "SECL") then
+        if (xml.root.el[i].name == "SECL") then
             a.secl.type = string.lower(xml.root.el[i].attr['LightingFormat'])
             a.secl.PresetPatterns = {}
             a.secl.ForcedPatterns = {}
-            for ex=1,#xml.root.el[i].kids do
-                if(xml.root.el[i].kids[ex].name == "PresetPatterns") then
-                    for inner=1,#xml.root.el[i].kids[ex].el do
+            for ex = 1, #xml.root.el[i].kids do
+                if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
+                    for inner = 1, #xml.root.el[i].kids[ex].el do
                         local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.secl.PresetPatterns[string.lower(elem.name)] = {}
-                        if string.lower(elem.attr['Enabled']) == "true" then a.secl.PresetPatterns[string.lower(elem.name)].enabled = true else a.secl.PresetPatterns[string.lower(elem.name)].enabled = false end
+                        if string.lower(elem.attr['Enabled']) == "true" then
+                            a.secl.PresetPatterns[string.lower(elem.name)].enabled = true
+                        else
+                            a.secl.PresetPatterns[string.lower(elem.name)].enabled = false
+                        end
                         a.secl.PresetPatterns[string.lower(elem.name)].pattern = tonumber(elem.attr['Pattern'])
                     end
                 end
-                if(xml.root.el[i].kids[ex].name == "ForcedPatterns") then
-                    for inner=1,#xml.root.el[i].kids[ex].el do
+                if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
+                    for inner = 1, #xml.root.el[i].kids[ex].el do
                         local elem = xml.root.el[i].kids[ex].el[inner]
 
                         a.secl.ForcedPatterns[string.lower(elem.name)] = {}
-                        if string.lower(elem.attr['Enabled']) == "true" then a.secl.ForcedPatterns[string.lower(elem.name)].enabled = true else a.secl.ForcedPatterns[string.lower(elem.name)].enabled = false end
+                        if string.lower(elem.attr['Enabled']) == "true" then
+                            a.secl.ForcedPatterns[string.lower(elem.name)].enabled = true
+                        else
+                            a.secl.ForcedPatterns[string.lower(elem.name)].enabled = false
+                        end
                         a.secl.ForcedPatterns[string.lower(elem.name)].pattern = tonumber(elem.attr['Pattern'])
                     end
                 end
@@ -436,16 +462,15 @@ function parsePatternData(xml, fileName)
     local primary = {}
     local secondary = {}
     local advisor = {}
-    local patternError = false
 
     fileName = string.sub(fileName, 1, -5)
 
-    for i=1,#xml.root.el do
-        if(xml.root.el[i].name == "PRIMARY") then
+    for i = 1, #xml.root.el do
+        if (xml.root.el[i].name == "PRIMARY") then
             primary.stages = {}
             primary.speed = tonumber(xml.root.el[i].attr["speed"])
-            for ex=1,#xml.root.el[i].kids do
-                if(string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
+            for ex = 1, #xml.root.el[i].kids do
+                if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
                     local elem = xml.root.el[i].kids[ex]
                     primary.stages[spot] = {}
@@ -516,11 +541,11 @@ function parsePatternData(xml, fileName)
                 end
             end
         end
-        if(xml.root.el[i].name == "SECONDARY") then
+        if (xml.root.el[i].name == "SECONDARY") then
             secondary.stages = {}
             secondary.speed = tonumber(xml.root.el[i].attr["speed"])
-            for ex=1,#xml.root.el[i].kids do
-                if(string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
+            for ex = 1, #xml.root.el[i].kids do
+                if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
                     local elem = xml.root.el[i].kids[ex]
                     secondary.stages[spot] = {}
@@ -591,12 +616,12 @@ function parsePatternData(xml, fileName)
                 end
             end
         end
-        if(xml.root.el[i].name == "ADVISOR") then
+        if (xml.root.el[i].name == "ADVISOR") then
             advisor = {}
             advisor.stages = {}
             advisor.speed = tonumber(xml.root.el[i].attr["speed"])
-            for ex=1,#xml.root.el[i].kids do
-                if(string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
+            for ex = 1, #xml.root.el[i].kids do
+                if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
                     local elem = xml.root.el[i].kids[ex]
 
@@ -698,11 +723,11 @@ function parseObjSet(data, fileName)
 end
 
 function configCheck()
-    if (panelOffsetX == nil) then
-        print("\n\n[ERROR] Please add 'panelOffsetX = 0.0' to your config or you will not get a panel.\n\n")
+    if (Config.panelOffsetX == nil) then
+        print("\n\n[ERROR] Please add 'Config.panelOffsetX = 0.0' to your config or you will not get a panel.\n\n")
     end
-    if (panelOffsetY == nil) then
-        print("\n\n[ERROR] Please add 'panelOffsetY = 0.0' to your config or you will not get a panel.\n\n")
+    if (Config.panelOffsetY == nil) then
+        print("\n\n[ERROR] Please add 'Config.panelOffsetY = 0.0' to your config or you will not get a panel.\n\n")
     end
 end
 
@@ -713,16 +738,17 @@ AddEventHandler('onResourceStart', function(name)
         patternInfoTable.advisors = {}
 
         local vcfType = type(vcf_files)
-        assert(vcfType == "table", string.format("Expected type 'table' for vcf_files, got %s. %s", vcfType, vcfType == "nil" and 
-            "Please make sure you have a file called 'vcf.lua' in the resource root folder (resources/ELS-FiveM or similar). Copy the contents of 'vcf.default.lua' " ..
-            "and alter accordingly." or "")
-        )
+        assert(vcfType == "table",
+            string.format("Expected type 'table' for vcf_files, got %s. %s", vcfType, vcfType == "nil" and
+                "Please make sure you have a file called 'vcf.lua' in the resource root folder (resources/ELS-FiveM or similar). Copy the contents of 'vcf.default.lua' " ..
+                "and alter accordingly." or ""))
 
         local loadedFiles = 0
-        for i=1,#vcf_files do
+        for i = 1, #vcf_files do
             local hasExt = true
             if string.sub(vcf_files[i], -4) ~= '.xml' then
-                print("^1[" .. resourceName .. "] ^3Expected file extension for file " .. vcf_files[i] .. ", please append '.xml' to this entry in the vcf.lua file.^0")
+                print("^3Expected file extension for file " .. vcf_files[i] ..
+                          ", please append '.xml' to this entry in the vcf.lua file.^0")
                 hasExt = false
             end
 
@@ -736,8 +762,7 @@ AddEventHandler('onResourceStart', function(name)
             end
         end
 
-
-        print("^1[" .. resourceName .. "] ^2Successfully loaded " .. loadedFiles .. "/" .. #vcf_files .. " VCF files!^0")
+        print("^2Successfully loaded " .. loadedFiles .. "/" .. #vcf_files .. " VCF files!^0")
 
         configCheck()
     end

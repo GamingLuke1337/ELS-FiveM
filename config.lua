@@ -1,29 +1,31 @@
-outputLoading = false
-playButtonPressSounds = true
-printDebugInformation = false
+Config = {}
 
-vehicleSyncDistance = 150
-environmentLightBrightness = 0.006
-lightDelay = 10 -- Time in MS
-flashDelay = 15
+Config.update = true 
 
-panelEnabled = true
-panelType = "original"
-panelOffsetX = 0.0
-panelOffsetY = 0.0
+Config.playButtonPressSounds = true
 
-allowedPanelTypes = {
+Config.vehicleSyncDistance = 150
+Config.environmentLightBrightness = 0.006
+Config.lightDelay = 10 -- Time in MS
+Config.flashDelay = 15
+
+Config.panelEnabled = true
+Config.panelType = "original"
+Config.panelOffsetX = 0.0
+Config.panelOffsetY = 0.0
+
+Config.allowedPanelTypes = {
     "original",
     "old"
 }
 
 -- https://docs.fivem.net/game-references/controls
 
-shared = {
+Config.shared = {
     horn = 86,
 }
 
-keyboard = {
+Config.keyboard = {
     modifyKey = 132,
     stageChange = 85, -- Q
     guiKey = 199, -- P
@@ -48,7 +50,7 @@ keyboard = {
     primary = 7, -- ??
 }
 
-controller = {
+Config.controller = {
     modifyKey = 73,
     stageChange = 80,
     takedown = 74,

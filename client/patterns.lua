@@ -70,8 +70,8 @@ function runEnvironmentLight(k, extra)
                             coords.y + els_Vehicles[vehN].extras[extra].env_pos.y,
                             coords.z + els_Vehicles[vehN].extras[extra].env_pos.z,
                             els_Vehicles[vehN].extras[extra].env_color.r, els_Vehicles[vehN].extras[extra].env_color.g,
-                            els_Vehicles[vehN].extras[extra].env_color.b, 50.0, environmentLightBrightness, 5.0)
-                        -- DrawLightWithRange(coords.x + els_Vehicles[vehN].extras[extra].env_pos.x, coords.y + els_Vehicles[vehN].extras[extra].env_pos.y, coords.z + els_Vehicles[vehN].extras[extra].env_pos.z, els_Vehicles[vehN].extras[extra].env_color.r, els_Vehicles[vehN].extras[extra].env_color.g, els_Vehicles[vehN].extras[extra].env_color.b, 150 + 0.0, environmentLightBrightness)
+                            els_Vehicles[vehN].extras[extra].env_color.b, 50.0, Config.environmentLightBrightness, 5.0)
+                        -- DrawLightWithRange(coords.x + els_Vehicles[vehN].extras[extra].env_pos.x, coords.y + els_Vehicles[vehN].extras[extra].env_pos.y, coords.z + els_Vehicles[vehN].extras[extra].env_pos.z, els_Vehicles[vehN].extras[extra].env_color.r, els_Vehicles[vehN].extras[extra].env_color.g, els_Vehicles[vehN].extras[extra].env_color.b, 150 + 0.0, Config.environmentLightBrightness)
                         Wait(2)
                     end
                 end
@@ -106,7 +106,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][1]) then
                             done[1] = true
@@ -130,7 +130,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][2]) then
                             done[2] = true
@@ -154,7 +154,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][3]) then
                             done[3] = true
@@ -178,7 +178,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][4]) then
                             done[4] = true
@@ -202,7 +202,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][5]) then
                             done[5] = true
@@ -226,7 +226,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][6]) then
                             done[6] = true
@@ -250,7 +250,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][7]) then
                             done[7] = true
@@ -274,7 +274,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][8]) then
                             done[8] = true
@@ -298,7 +298,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][9]) then
                             done[9] = true
@@ -322,7 +322,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageOne[pattern][10]) then
                             done[10] = true
@@ -346,7 +346,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][1]) then
                             done[1] = true
@@ -370,7 +370,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][2]) then
                             done[2] = true
@@ -394,7 +394,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][3]) then
                             done[3] = true
@@ -418,7 +418,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][4]) then
                             done[4] = true
@@ -442,7 +442,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][5]) then
                             done[5] = true
@@ -466,7 +466,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][6]) then
                             done[6] = true
@@ -490,7 +490,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][7]) then
                             done[7] = true
@@ -514,7 +514,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][8]) then
                             done[8] = true
@@ -538,7 +538,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][9]) then
                             done[9] = true
@@ -562,7 +562,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageTwo[pattern][10]) then
                             done[10] = true
@@ -586,7 +586,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][1]) then
                             done[1] = true
@@ -610,7 +610,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][2]) then
                             done[2] = true
@@ -634,7 +634,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][3]) then
                             done[3] = true
@@ -658,7 +658,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][4]) then
                             done[4] = true
@@ -682,7 +682,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][5]) then
                             done[5] = true
@@ -706,7 +706,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][6]) then
                             done[6] = true
@@ -730,7 +730,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][7]) then
                             done[7] = true
@@ -754,7 +754,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][8]) then
                             done[8] = true
@@ -778,7 +778,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][9]) then
                             done[9] = true
@@ -802,7 +802,7 @@ function runCHPPattern(k, pattern, stage)
                             break
                         end
 
-                        Wait(GetConvarInt("els_lightDelay", 10))
+                        Wait(Config.lightDelay)
 
                         if spot == string.len(chp_StageThree[pattern][10]) then
                             done[10] = true
@@ -831,7 +831,7 @@ local trafPatternReady = {}
 function runTrafPattern(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (trafPatternReady[k] or trafPatternReady[k] == nil)) then
-            if (GetGameTimer() - trafFR >= GetConvarInt("els_lightDelay", 10)) then
+            if (GetGameTimer() - trafFR >= Config.lightDelay then
 
                 trafPatternReady[k] = false
 
@@ -858,7 +858,7 @@ function runTrafPattern(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(traf_Patterns[pattern][7]) then
                             done[1] = true
@@ -887,7 +887,7 @@ function runTrafPattern(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(traf_Patterns[pattern][8]) then
                             done[2] = true
@@ -916,7 +916,7 @@ function runTrafPattern(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(traf_Patterns[pattern][9]) then
                             done[3] = true
@@ -944,7 +944,7 @@ local ledSecondaryReady = {}
 function runLedPatternSecondary(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (ledSecondaryReady[k] or ledSecondaryReady[k] == nil)) then
-            if (GetGameTimer() - trafFR >= GetConvarInt("els_lightDelay", 10)) then
+            if (GetGameTimer() - trafFR >= Config.lightDelay then
 
                 ledSecondaryReady[k] = false
 
@@ -975,7 +975,7 @@ function runLedPatternSecondary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_SecondaryPatterns[pattern][7]) then
                             done[1] = true
@@ -1008,7 +1008,7 @@ function runLedPatternSecondary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_SecondaryPatterns[pattern][8]) then
                             done[2] = true
@@ -1040,7 +1040,7 @@ function runLedPatternSecondary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_SecondaryPatterns[pattern][9]) then
                             done[3] = true
@@ -1067,7 +1067,7 @@ local ledWarningReady = {}
 function runLedPatternWarning(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (ledWarningReady[k] or ledWarningReady[k] == nil)) then
-            if (GetGameTimer() - warnFR >= GetConvarInt("els_lightDelay", 10)) then
+            if (GetGameTimer() - warnFR >= Config.lightDelay then
 
                 ledWarningReady[k] = false
 
@@ -1094,7 +1094,7 @@ function runLedPatternWarning(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(leds_WarningPatterns[pattern][5]) then
                             done[1] = true
@@ -1123,7 +1123,7 @@ function runLedPatternWarning(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(leds_WarningPatterns[pattern][6]) then
                             done[2] = true
@@ -1151,7 +1151,7 @@ local ledPrimaryReady = {}
 function runLedPatternPrimary(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (ledPrimaryReady[k] or ledPrimaryReady[k] == nil)) then
-            if (GetGameTimer() - primFR >= GetConvarInt("els_lightDelay", 10)) then
+            if (GetGameTimer() - primFR >= Config.lightDelay then
                 ledPrimaryReady[k] = false
 
                 local done = {}
@@ -1177,7 +1177,7 @@ function runLedPatternPrimary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_PrimaryPatterns[pattern][1]) then
                             done[1] = true
@@ -1206,7 +1206,7 @@ function runLedPatternPrimary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_PrimaryPatterns[pattern][2]) then
                             done[2] = true
@@ -1235,7 +1235,7 @@ function runLedPatternPrimary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_PrimaryPatterns[pattern][3]) then
                             done[3] = true
@@ -1264,7 +1264,7 @@ function runLedPatternPrimary(k, pattern)
                             break
                         end
 
-                        Wait(GetConvarInt("els_flashDelay", 15))
+                        Wait(Config.flashDelay)
 
                         if spot == string.len(led_PrimaryPatterns[pattern][4]) then
                             done[4] = true

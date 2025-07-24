@@ -44,7 +44,7 @@ function SLAXML:parse(xml, fileName, options)
 
 	-- Cache references for maximum speed
 	local find, sub, gsub, char, push, pop, concat = string.find, string.sub, string.gsub, string.char, table.insert, table.remove, table.concat
-	local first, last, match1, match2, match3, pos2, nsURI
+	local first, last, match1, match2, pos2, nsURI
 	local unpack = unpack or table.unpack
 	local pos = 1
 	local state = "text"
@@ -53,7 +53,6 @@ function SLAXML:parse(xml, fileName, options)
 	local currentAttributes={}
 	local currentAttributeCt -- manually track length since the table is re-used
 	local nsStack = {}
-	local anyElement = false
 
 	local utf8markers = { {0x7FF,192}, {0xFFFF,224}, {0x1FFFFF,240} }
 	local function utf8(decimal) -- convert unicode code point to utf-8 encoded character string
@@ -116,7 +115,6 @@ function SLAXML:parse(xml, fileName, options)
 	end
 
 	local function startElement()
-		anyElement = true
 		first, last, match1 = find( xml, '^<([%a_][%w_.-]*)', pos )
 		if first then
 			currentElement[2] = nil -- reset the nsURI, since this table is re-used
@@ -252,7 +250,6 @@ function SLAXML:parse(xml, fileName, options)
 		end
 	end
 
-	-- if not anyElement then error("Parsing did not discover any elements") end
 	-- if #nsStack > 0 then print("Parsing could not find closing to attribute. Please put in online validator and fix!\nTo figure out what Pattern/VCF is broken look at the last loaded, the one after that is broken.\n\n") end
 end
 

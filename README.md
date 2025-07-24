@@ -33,4 +33,4 @@ https://github.com/MrDaGree/ELS-FiveM/wiki/Controls
 | `els_outputLoading` | boolean           | This outputs the loaded vehicles that have been specified in the vcf.lua                                              | `setr els_outputLoading true` | "false"      |
 | `els_debug`         | boolean           | This prints information to both client or server with information of what is happening                                | `setr els_debug true`         | "false"      |
 | `els_developer`     | boolean           | Provides access to developer features which may break ELS for clients on your server, should only be used when asked. | `setr els_developer true`     | "false"      |
-| `els_warnOnJoin`    | boolean           | Displays a warning if the current version is outdated                                                                 | `setr els_warnOnJoin true`    | "false"      |
+
