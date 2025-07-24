@@ -333,7 +333,7 @@ function parseVehData(xml, fileName)
             a.wrnl.PresetPatterns = {}
             a.wrnl.ForcedPatterns = {}
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
+                local elem = xml.root.el[i].kids[ex].el[inner]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
                         a.wrnl.PresetPatterns[string.lower(elem.name)] = {}
@@ -366,7 +366,7 @@ function parseVehData(xml, fileName)
             a.priml.PresetPatterns = {}
             a.priml.ForcedPatterns = {}
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
+                local elem = xml.root.el[i].kids[ex].el[inner]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
 
@@ -399,7 +399,7 @@ function parseVehData(xml, fileName)
             a.secl.PresetPatterns = {}
             a.secl.ForcedPatterns = {}
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
+                local elem = xml.root.el[i].kids[ex].el[inner]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
                     for inner = 1, #xml.root.el[i].kids[ex].el do
 
@@ -450,7 +450,7 @@ function parsePatternData(xml, fileName)
             primary.stages = {}
             primary.speed = tonumber(xml.root.el[i].attr["speed"])
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
+                local elem = xml.root.el[i].kids[ex].el[inner]
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
                     primary.stages[spot] = {}
@@ -525,7 +525,7 @@ function parsePatternData(xml, fileName)
             secondary.stages = {}
             secondary.speed = tonumber(xml.root.el[i].attr["speed"])
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
+                local elem = xml.root.el[i].kids[ex].el[inner]
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
                     secondary.stages[spot] = {}
@@ -601,7 +601,7 @@ function parsePatternData(xml, fileName)
             advisor.stages = {}
             advisor.speed = tonumber(xml.root.el[i].attr["speed"])
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
+                local elem = xml.root.el[i].kids[ex].el[inner]
                 if (string_upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
                     local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
 
