@@ -19,6 +19,7 @@ h_soundID_veh = {}
 local dualEnable = {}
 local vehIsReadySecondary = {}
 local vehicle = nil
+local lastVehicleStates = {}
 
 local networkSessionActive = true
 
@@ -877,77 +878,100 @@ CreateThread(function()
     end
 end)
 
-
-
 CreateThread(function()
     while true do
-        for k,v in pairs(elsVehs) do
-            if v ~= nil and DoesEntityExist(k) and #(GetEntityCoords(k)-GetEntityCoords(GetPlayerPed(-1))) <= vehicleSyncDistance then
-                SetVehicleAutoRepairDisabled(k, true)
+        for k, v in pairs(elsVehs) do
+            if v ~= nil and DoesEntityExist(k) and #(GetEntityCoords(k) - GetEntityCoords(PlayerPedId())) <= vehicleSyncDistance then
+                
+                local lastState = lastVehicleStates[k] or {}
 
-                if getVehicleVCFInfo(k) == false then
+                local vcfInfo = getVehicleVCFInfo(k)
+                if not vcfInfo then
                     debugPrint("Insufficient VCF information obtained for " .. k .. ", returning.", true, true)
-                    return
+                    goto continue
                 end
 
-                if getVehicleVCFInfo(k).priml.type == "chp" and getVehicleVCFInfo(k).wrnl.type == "chp" and getVehicleVCFInfo(k).secl.type == "chp" then
+                if
+                    lastState.stage ~= v.stage or
+                    lastState.advisorPattern ~= v.advisorPattern or
+                    lastState.secPattern ~= v.secPattern or
+                    lastState.primPattern ~= v.primPattern or
+                    lastState.warning ~= v.warning or
+                    lastState.secondary ~= v.secondary or
+                    lastState.primary ~= v.primary
+                then
+                    lastVehicleStates[k] = {
+                        stage = v.stage,
+                        advisorPattern = v.advisorPattern,
+                        secPattern = v.secPattern,
+                        primPattern = v.primPattern,
+                        warning = v.warning,
+                        secondary = v.secondary,
+                        primary = v.primary
+                    }
 
-                    if v.stage == 0 then
-                        for i=1,10 do
-                            setExtraState(k, i, 1)
+                    SetVehicleAutoRepairDisabled(k, true)
+
+                    if vcfInfo.priml.type == "chp" and vcfInfo.wrnl.type == "chp" and vcfInfo.secl.type == "chp" then
+
+                        if v.stage == 0 then
+                            for i = 1, 10 do
+                                setExtraState(k, i, 1)
+                            end
                         end
-                    end
 
-                    if v.stage == 1 and v.advisorPattern <= 1 then
-                        runCHPPattern(k, v.advisorPattern, v.stage)
-                    end
-
-                    if v.stage == 2 and v.secPattern <= 3 then
-                        runCHPPattern(k, v.secPattern, v.stage)
-                    end
-
-                    if v.stage == 3 and v.primPattern <= 3 then
-                        runCHPPattern(k, v.primPattern, v.stage)
-                    end
-
-                else
-
-                    if (v.warning) then
-                        if getVehicleVCFInfo(k).wrnl.type == "leds" and v.advisorPattern <= 53 then
-                            runLedPatternWarning(k, v.advisorPattern)
+                        if v.stage == 1 and v.advisorPattern <= 1 then
+                            runCHPPattern(k, v.advisorPattern, v.stage)
                         end
+
+                        if v.stage == 2 and v.secPattern <= 3 then
+                            runCHPPattern(k, v.secPattern, v.stage)
+                        end
+
+                        if v.stage == 3 and v.primPattern <= 3 then
+                            runCHPPattern(k, v.primPattern, v.stage)
+                        end
+
                     else
-                        setExtraState(k, 5, 1)
-                        setExtraState(k, 6, 1)
-                    end
 
-                    if (v.secondary) then
-                        if getVehicleVCFInfo(k).secl.type == "leds" and v.secPattern <= 140 then
-                            runLedPatternSecondary(k, v.secPattern, function(cb) vehIsReadySecondary[k] = cb end)
-                        elseif getVehicleVCFInfo(k).secl.type == "traf" and v.secPattern <= 36 then
-                            runTrafPattern(k, v.secPattern)
+                        if v.warning then
+                            if vcfInfo.wrnl.type == "leds" and v.advisorPattern <= 53 then
+                                runLedPatternWarning(k, v.advisorPattern)
+                            end
+                        else
+                            setExtraState(k, 5, 1)
+                            setExtraState(k, 6, 1)
                         end
-                    else
-                        setExtraState(k, 7, 1)
-                        setExtraState(k, 8, 1)
-                        setExtraState(k, 9, 1)
-                    end
 
-                    if (v.primary) then
-                        if getVehicleVCFInfo(k).priml.type == "leds" and v.primPattern <= 140 then
-                            runLedPatternPrimary(k, v.primPattern)
+                        if v.secondary then
+                            if vcfInfo.secl.type == "leds" and v.secPattern <= 140 then
+                                runLedPatternSecondary(k, v.secPattern, function(cb) vehIsReadySecondary[k] = cb end)
+                            elseif vcfInfo.secl.type == "traf" and v.secPattern <= 36 then
+                                runTrafPattern(k, v.secPattern)
+                            end
+                        else
+                            setExtraState(k, 7, 1)
+                            setExtraState(k, 8, 1)
+                            setExtraState(k, 9, 1)
                         end
-                    else
-                        setExtraState(k, 1, 1)
-                        setExtraState(k, 2, 1)
-                        setExtraState(k, 3, 1)
-                        setExtraState(k, 4, 1)
-                    end
 
+                        if v.primary then
+                            if vcfInfo.priml.type == "leds" and v.primPattern <= 140 then
+                                runLedPatternPrimary(k, v.primPattern)
+                            end
+                        else
+                            setExtraState(k, 1, 1)
+                            setExtraState(k, 2, 1)
+                            setExtraState(k, 3, 1)
+                            setExtraState(k, 4, 1)
+                        end
+
+                    end
                 end
             end
+            ::continue::
         end
-        Citizen.Wait(0)
+
+        Citizen.Wait(250)
     end
 end)
-

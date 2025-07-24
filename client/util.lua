@@ -10,7 +10,7 @@ end)
 
 RegisterNetEvent("els:changeLightStage_c")
 AddEventHandler("els:changeLightStage_c", function(sender, stage, advisor, prim, sec)
-    Citizen.CreateThread(function()
+    CreateThread(function()
 
         local player_s = GetPlayerFromServerId(sender)
         local ped_s = GetPlayerPed(player_s)
@@ -278,7 +278,7 @@ end)
 
 function toggleSirenMute(veh, toggle)
     if DoesEntityExist(veh) and not IsEntityDead(veh) then
-        DisableVehicleImpactExplosionActivation(veh, toggle)
+        SetVehicleHasMutedSirens(veh, toggle)
     end
 end
 
@@ -294,11 +294,6 @@ function setHornState(veh, newstate)
                         
             if newstate == 1 then
                 h_soundID_veh[veh] = GetSoundId()
-                if getVehicleVCFInfo(veh).sounds.mainHorn.SoundSet == nil then
-                    local SoundSet = 0
-                else
-                    local SoundSet = getVehicleVCFInfo(veh).sounds.mainHorn.SoundSet
-                end
                 PlaySoundFromEntity(h_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.mainHorn.audioString, veh, SoundSet, 0, 0)
             end             
                 
@@ -320,33 +315,18 @@ function setSirenState(veh, newstate)
             if newstate == 1 then
 
                 m_soundID_veh[veh] = GetSoundId()
-                if getVehicleVCFInfo(veh).sounds.srnTone1.SoundSet == nil then
-                    local SoundSet = 0
-                else
-                    local SoundSet = getVehicleVCFInfo(veh).sounds.srnTone1.SoundSet
-                end
                 PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone1.audioString, veh, SoundSet, 0, 0)
                 toggleSirenMute(veh, true)
                 
             elseif newstate == 2 then
 
                 m_soundID_veh[veh] = GetSoundId() 
-                if getVehicleVCFInfo(veh).sounds.srnTone2.SoundSet == nil then
-                    local SoundSet = 0
-                else
-                    local SoundSet = getVehicleVCFInfo(veh).sounds.srnTone2.SoundSet
-                end
                 PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone2.audioString, veh, SoundSet, 0, 0)
                 toggleSirenMute(veh, true)
                 
             elseif newstate == 3 then
 
                 m_soundID_veh[veh] = GetSoundId()
-                if getVehicleVCFInfo(veh).sounds.srnTone3.SoundSet == nil then
-                    local SoundSet = 0
-                else
-                    local SoundSet = getVehicleVCFInfo(veh).sounds.srnTone3.SoundSet
-                end
                 PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone3.audioString, veh, SoundSet, 0, 0)
                 toggleSirenMute(veh, true)
                 
@@ -468,7 +448,7 @@ function Draw(text, r, g, b, alpha, x, y, width, height, ya, center, font)
 end
 
 function hornCleanup()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for vehicle, state in pairs(h_horn_state) do
             if state >= 0 then
                 if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
@@ -486,7 +466,7 @@ function hornCleanup()
 end
 
 function sirenCleanup()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for vehicle, state in pairs(m_siren_state) do
             if m_soundID_veh[vehicle] ~= nil then
                 if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
@@ -518,7 +498,7 @@ function _DrawRect(x, y, width, height, r, g, b, a, ya)
 end
 
 function vehicleLightCleanup()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for vehicle,_ in pairs(elsVehs) do
             if elsVehs[vehicle] then
                 if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
