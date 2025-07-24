@@ -2,20 +2,6 @@ vehicleInfoTable = {}
 patternInfoTable = {}
 
 RegisterCommand('els', function(source, args)
-    local function notify(plr, text)
-        assert(type(plr) == "number", "Expected type 'number' for parameter #1 in 'notify'.")
-
-        if plr == 0 then
-            return print(text)
-        end
-
-        if GetPlayerName(plr) == nil then
-            error("Invalid player passed for parameter #1 in 'notify'.")
-        end
-
-        TriggerClientEvent("els:notify", plr, text)
-    end
-
     if args[1] == 'panel' then
         if source == 0 then
             return
@@ -62,8 +48,8 @@ function parseVehData(xml, fileName)
 
     for i = 1, #xml.root.el do
         if (xml.root.el[i].name == "INTERFACE") then
-            local elem = xml.root.el[i].kids[ex]
             for ex = 1, #xml.root.el[i].kids do
+                local elem = xml.root.el[i].kids[ex]
                 if (xml.root.el[i].kids[ex].name == "LstgActivationType") then
                     a.interface.activationType = elem.kids[1].value
 
@@ -92,7 +78,6 @@ function parseVehData(xml, fileName)
                     end
                 end
                 if (xml.root.el[i].kids[ex].name == "InfoPanelButtonLightColor") then
-                    local elem = xml.root.el[i].kids[ex]
                     a.interface.buttonColor = {}
 
                     a.interface.buttonColor['r'] = 255
@@ -193,12 +178,10 @@ function parseVehData(xml, fileName)
         if (xml.root.el[i].name == "MISC") then
             for ex = 1, #xml.root.el[i].kids do
                 if (xml.root.el[i].kids[ex].name == "ArrowboardType") then
-                    local elem = xml.root.el[i].kids[ex]
                     a.misc.arrowboardType = elem.kids[1].value
                 end
 
                 if (xml.root.el[i].kids[ex].name == "UseSteadyBurnLights") then
-                    local elem = xml.root.el[i].kids[ex]
                     if elem.kids[1].value == "true" then
                         a.misc.usesteadyburnlights = true
                     else
@@ -207,7 +190,6 @@ function parseVehData(xml, fileName)
                 end
 
                 if (xml.root.el[i].kids[ex].name == "DfltSirenLtsActivateAtLstg") then
-                    local elem = xml.root.el[i].kids[ex]
                     a.misc.dfltsirenltsactivateatlstg = tonumber(elem.kids[1].value)
                 end
             end
@@ -215,7 +197,6 @@ function parseVehData(xml, fileName)
 
         if (xml.root.el[i].name == "CRUISE") then
             for ex = 1, #xml.root.el[i].kids do
-                local elem = xml.root.el[i].kids[ex]
                 if (xml.root.el[i].kids[ex].name == "UseExtras") then
                     if elem.attr['Extra1'] == "true" then
                         a.cruise[1] = 0

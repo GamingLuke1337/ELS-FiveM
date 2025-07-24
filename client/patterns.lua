@@ -831,7 +831,7 @@ local trafPatternReady = {}
 function runTrafPattern(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (trafPatternReady[k] or trafPatternReady[k] == nil)) then
-            if (GetGameTimer() - trafFR >= Config.lightDelay then
+            if (GetGameTimer() - trafFR >= Config.lightDelay) then
 
                 trafPatternReady[k] = false
 
@@ -944,7 +944,7 @@ local ledSecondaryReady = {}
 function runLedPatternSecondary(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (ledSecondaryReady[k] or ledSecondaryReady[k] == nil)) then
-            if (GetGameTimer() - trafFR >= Config.lightDelay then
+            if (GetGameTimer() - trafFR >= Config.lightDelay) then
 
                 ledSecondaryReady[k] = false
 
@@ -1067,7 +1067,7 @@ local ledWarningReady = {}
 function runLedPatternWarning(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (ledWarningReady[k] or ledWarningReady[k] == nil)) then
-            if (GetGameTimer() - warnFR >= Config.lightDelay then
+            if (GetGameTimer() - warnFR >= Config.lightDelay) then
 
                 ledWarningReady[k] = false
 
@@ -1151,7 +1151,7 @@ local ledPrimaryReady = {}
 function runLedPatternPrimary(k, pattern)
     CreateThread(function()
         if (not IsEntityDead(k) and DoesEntityExist(k) and (ledPrimaryReady[k] or ledPrimaryReady[k] == nil)) then
-            if (GetGameTimer() - primFR >= Config.lightDelay then
+            if (GetGameTimer() - primFR >= Config.lightDelay) then
                 ledPrimaryReady[k] = false
 
                 local done = {}

@@ -1082,32 +1082,18 @@ CreateThread(function()
 
                     else
 
-                        if v.warning then
-                            if vcfInfo.wrnl.type == "leds" and v.advisorPattern <= 53 then
-                                runLedPatternWarning(k, v.advisorPattern)
-                            end
-                        else
+                        if not v.warning then
                             setExtraState(k, 5, 1)
                             setExtraState(k, 6, 1)
                         end
 
-                        if v.secondary then
-                            if vcfInfo.secl.type == "leds" and v.secPattern <= 140 then
-                                runLedPatternSecondary(k, v.secPattern)
-                            elseif vcfInfo.secl.type == "traf" and v.secPattern <= 36 then
-                                runTrafPattern(k, v.secPattern)
-                            end
-                        else
+                        if not v.secondary then
                             setExtraState(k, 7, 1)
                             setExtraState(k, 8, 1)
                             setExtraState(k, 9, 1)
                         end
 
-                        if v.primary then
-                            if vcfInfo.priml.type == "leds" and v.primPattern <= 140 then
-                                runLedPatternPrimary(k, v.primPattern)
-                            end
-                        else
+                        if not v.primary then
                             setExtraState(k, 1, 1)
                             setExtraState(k, 2, 1)
                             setExtraState(k, 3, 1)
