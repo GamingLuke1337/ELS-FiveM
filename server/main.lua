@@ -1,5 +1,14 @@
 vehicleInfoTable = {}
 patternInfoTable = {}
+local a = {}
+a.interface = {}
+a.extras = {}
+a.misc = {}
+a.cruise = {}
+a.sounds = {}
+a.wrnl = {}
+a.priml = {}
+a.secl = {}
 
 RegisterCommand('els', function(source, args)
     if args[1] == 'panel' then
@@ -33,17 +42,7 @@ function string_upper(str)
 end
 
 function parseVehData(xml, fileName)
-
-    local a = {}
     fileName = string.sub(fileName, 1, -5)
-    a.interface = {}
-    a.extras = {}
-    a.misc = {}
-    a.cruise = {}
-    a.sounds = {}
-    a.wrnl = {}
-    a.priml = {}
-    a.secl = {}
 
     for i = 1, #xml.root.el do
         if (xml.root.el[i].name == "INTERFACE") then
@@ -326,8 +325,6 @@ function parseVehData(xml, fileName)
             end
         end
 
-        elem = xml.root.el[i].kids[ex].el[inner]
-
         if (xml.root.el[i].name == "WRNL") then
             a.wrnl.type = string.lower(xml.root.el[i].attr['LightingFormat'])
             a.wrnl.PresetPatterns = {}
@@ -335,7 +332,7 @@ function parseVehData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 local elem = xml.root.el[i].kids[ex].el[inner]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
-                    for inner = 1, #xml.root.el[i].kids[ex].el do
+                    for idx =1, #xml.root.el[i].kids[ex].el do
                         a.wrnl.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
                             a.wrnl.PresetPatterns[string.lower(elem.name)].enabled = true
@@ -346,7 +343,7 @@ function parseVehData(xml, fileName)
                     end
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
-                    for inner = 1, #xml.root.el[i].kids[ex].el do
+                    for idx =1, #xml.root.el[i].kids[ex].el do
 
                         a.wrnl.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled'] or "false") == "true" then
@@ -368,7 +365,7 @@ function parseVehData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 local elem = xml.root.el[i].kids[ex].el[inner]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
-                    for inner = 1, #xml.root.el[i].kids[ex].el do
+                    for idx =1, #xml.root.el[i].kids[ex].el do
 
                         a.priml.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -380,7 +377,7 @@ function parseVehData(xml, fileName)
                     end
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
-                    for inner = 1, #xml.root.el[i].kids[ex].el do
+                    for idx =1, #xml.root.el[i].kids[ex].el do
 
                         a.priml.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -401,7 +398,7 @@ function parseVehData(xml, fileName)
             for ex = 1, #xml.root.el[i].kids do
                 local elem = xml.root.el[i].kids[ex].el[inner]
                 if (xml.root.el[i].kids[ex].name == "PresetPatterns") then
-                    for inner = 1, #xml.root.el[i].kids[ex].el do
+                    for idx =1, #xml.root.el[i].kids[ex].el do
 
                         a.secl.PresetPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
@@ -413,7 +410,7 @@ function parseVehData(xml, fileName)
                     end
                 end
                 if (xml.root.el[i].kids[ex].name == "ForcedPatterns") then
-                    for inner = 1, #xml.root.el[i].kids[ex].el do
+                    for idx =1, #xml.root.el[i].kids[ex].el do
 
                         a.secl.ForcedPatterns[string.lower(elem.name)] = {}
                         if string.lower(elem.attr['Enabled']) == "true" then
