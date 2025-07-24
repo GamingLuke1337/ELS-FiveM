@@ -2,22 +2,12 @@ els_Vehicles = {}
 
 RequestScriptAudioBank("DLC_WMSIRENS\\SIRENPACK_ONE", false)
 
-k = nil
-vehName = nil
-lightingStage = 0
-fps = 0
-prevframes = 0
-curframes = 0
-prevtime = 0
-curtime = 0
 advisorPatternSelectedIndex = 1
-advisorPatternIndex = 1
 
 lightPatternPrim = 0
 lightPatternsPrim = 1
 lightPatternSec = 1
 
-guiEnabled = true
 elsVehs = {}
 
 m_siren_state = {}
@@ -27,8 +17,6 @@ d_siren_state = {}
 d_soundID_veh = {}
 h_horn_state = {}
 h_soundID_veh = {}
-
-curCleanupTime = 0
 
 local networkSessionActive = true
 
