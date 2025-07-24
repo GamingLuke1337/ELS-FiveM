@@ -14,7 +14,7 @@ AddEventHandler("els:changeLightStage_c", function(sender, stage, advisor, prim,
 
         local player_s = GetPlayerFromServerId(sender)
         local ped_s = GetPlayerPed(player_s)
-        if player_s ~= -1 then 
+        if player_s ~= -1 then
             if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
                 if IsPedInAnyVehicle(ped_s, false) then
 
@@ -68,7 +68,7 @@ AddEventHandler("els:changeLightStage_c", function(sender, stage, advisor, prim,
                     end
                 end
             end
-        end 
+        end
         return
     end)
 end)
@@ -77,7 +77,7 @@ RegisterNetEvent("els:changePartState_c")
 AddEventHandler("els:changePartState_c", function(sender, part, newstate)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
                 local vehNetID = GetVehiclePedIsUsing(ped_s)
@@ -100,7 +100,7 @@ RegisterNetEvent("els:changeAdvisorPattern_c")
 AddEventHandler("els:changeAdvisorPattern_c", function(sender, pat)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
 
@@ -121,7 +121,7 @@ AddEventHandler("els:changeAdvisorPattern_c", function(sender, pat)
                     elsVehs[vehNetID].advisorPattern = pat
                 end
             end
-        end 
+        end
     end
 end)
 
@@ -129,7 +129,7 @@ RegisterNetEvent("els:changeSecondaryPattern_c")
 AddEventHandler("els:changeSecondaryPattern_c", function(sender, pat)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
 
@@ -151,14 +151,14 @@ AddEventHandler("els:changeSecondaryPattern_c", function(sender, pat)
                 end
             end
         end
-    end 
+    end
 end)
 
 RegisterNetEvent("els:changePrimaryPattern_c")
 AddEventHandler("els:changePrimaryPattern_c", function(sender, pat)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
 
@@ -180,13 +180,13 @@ AddEventHandler("els:changePrimaryPattern_c", function(sender, pat)
                 end
             end
         end
-    end 
+    end
 end)
 
 RegisterNetEvent("els:setSirenState_c")
 AddEventHandler("els:setSirenState_c", function(sender, newstate)
     local player_s = GetPlayerFromServerId(sender)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         local ped_s = GetPlayerPed(player_s)
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
@@ -194,32 +194,32 @@ AddEventHandler("els:setSirenState_c", function(sender, newstate)
                 setSirenState(veh, newstate)
             end
         end
-    end 
+    end
 end)
 
 RegisterNetEvent("els:setHornState_c")
 AddEventHandler("els:setHornState_c", function(sender, newstate)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
                 local veh = GetVehiclePedIsUsing(ped_s)
                 setHornState(veh, newstate)
             end
         end
-    end        
+    end
 end)
 
 RegisterNetEvent("els:setSceneLightState_c")
 AddEventHandler("els:setSceneLightState_c", function(sender)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
                 local veh = GetVehiclePedIsUsing(ped_s)
-                if(elsVehs[veh] == nil) then
+                if (elsVehs[veh] == nil) then
                     changeLightStage(0, 1, 1, 1)
                 end
                 if IsVehicleExtraTurnedOn(veh, 12) then
@@ -236,7 +236,7 @@ RegisterNetEvent("els:setCruiseLights_c")
 AddEventHandler("els:setCruiseLights_c", function(sender)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
                 local veh = GetVehiclePedIsUsing(ped_s)
@@ -259,11 +259,11 @@ RegisterNetEvent("els:setTakedownState_c")
 AddEventHandler("els:setTakedownState_c", function(sender)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
-    if player_s ~= -1 then 
+    if player_s ~= -1 then
         if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
             if IsPedInAnyVehicle(ped_s, false) then
                 local veh = GetVehiclePedIsUsing(ped_s)
-                if(elsVehs[veh] == nil) then
+                if (elsVehs[veh] == nil) then
                     changeLightStage(0, 1, 1, 1)
                 end
                 if IsVehicleExtraTurnedOn(veh, 11) then
@@ -273,7 +273,7 @@ AddEventHandler("els:setTakedownState_c", function(sender)
                 end
             end
         end
-    end 
+    end
 end)
 
 function toggleSirenMute(veh, toggle)
@@ -282,21 +282,32 @@ function toggleSirenMute(veh, toggle)
     end
 end
 
+local function playSiren(veh, tone)
+    local vcf = getVehicleVCFInfo(veh)
+    m_soundID_veh[veh] = GetSoundId()
+
+    local soundData = vcf.sounds[tone]
+    local soundSet = soundData and soundData.SoundSet or 0
+    local audioString = soundData and soundData.audioString or ""
+
+    PlaySoundFromEntity(m_soundID_veh[veh], audioString, veh, soundSet, 0, 0)
+    toggleSirenMute(veh, true)
+end
+
 function setHornState(veh, newstate)
     if DoesEntityExist(veh) and not IsEntityDead(veh) then
         if newstate ~= h_horn_state[veh] then
-                
+
             if h_soundID_veh[veh] ~= nil then
                 StopSound(h_soundID_veh[veh])
                 ReleaseSoundId(h_soundID_veh[veh])
                 h_soundID_veh[veh] = nil
             end
-                        
+
             if newstate == 1 then
-                h_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(h_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.mainHorn.audioString, veh, SoundSet, 0, 0)
-            end             
-                
+                playHorn(veh)
+            end
+
             h_horn_state[veh] = newstate
         end
     end
@@ -305,35 +316,23 @@ end
 function setSirenState(veh, newstate)
     if DoesEntityExist(veh) and not IsEntityDead(veh) then
         if newstate ~= m_siren_state[veh] then
-                
+
             if m_soundID_veh[veh] ~= nil then
                 StopSound(m_soundID_veh[veh])
                 ReleaseSoundId(m_soundID_veh[veh])
                 m_soundID_veh[veh] = nil
             end
-                        
+
             if newstate == 1 then
-
-                m_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone1.audioString, veh, SoundSet, 0, 0)
-                toggleSirenMute(veh, true)
-                
+                playSiren(veh, "srnTone1")
             elseif newstate == 2 then
-
-                m_soundID_veh[veh] = GetSoundId() 
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone2.audioString, veh, SoundSet, 0, 0)
-                toggleSirenMute(veh, true)
-                
+                playSiren(veh, "srnTone2")
             elseif newstate == 3 then
-
-                m_soundID_veh[veh] = GetSoundId()
-                PlaySoundFromEntity(m_soundID_veh[veh], getVehicleVCFInfo(veh).sounds.srnTone3.audioString, veh, SoundSet, 0, 0)
-                toggleSirenMute(veh, true)
-                
+                playSiren(veh, "srnTone3")
             else
                 toggleSirenMute(veh, true)
-            end             
-                
+            end
+
             m_siren_state[veh] = newstate
         end
     end
@@ -342,29 +341,29 @@ end
 state_indic = {}
 
 function TogIndicStateForVeh(vehicle, newstate)
-	if DoesEntityExist(vehicle) and not IsEntityDead(vehicle) then
-		if newstate == 0 then -- off
-			SetVehicleIndicatorLights(vehicle, 0, false) -- R
-			SetVehicleIndicatorLights(vehicle, 1, false) -- L
-		elseif newstate == 1 then -- left
-			SetVehicleIndicatorLights(vehicle, 0, false) -- R
-			SetVehicleIndicatorLights(vehicle, 1, true) -- L
-		elseif newstate == 2 then -- right
-			SetVehicleIndicatorLights(vehicle, 0, true) -- R
-			SetVehicleIndicatorLights(vehicle, 1, false) -- L
-		elseif newstate == 3 then -- hazard
-			SetVehicleIndicatorLights(vehicle, 0, true) -- R
-			SetVehicleIndicatorLights(vehicle, 1, true) -- L
-		end
-		state_indic[vehicle] = newstate
-	end
+    if DoesEntityExist(vehicle) and not IsEntityDead(vehicle) then
+        if newstate == 0 then -- off
+            SetVehicleIndicatorLights(vehicle, 0, false) -- R
+            SetVehicleIndicatorLights(vehicle, 1, false) -- L
+        elseif newstate == 1 then -- left
+            SetVehicleIndicatorLights(vehicle, 0, false) -- R
+            SetVehicleIndicatorLights(vehicle, 1, true) -- L
+        elseif newstate == 2 then -- right
+            SetVehicleIndicatorLights(vehicle, 0, true) -- R
+            SetVehicleIndicatorLights(vehicle, 1, false) -- L
+        elseif newstate == 3 then -- hazard
+            SetVehicleIndicatorLights(vehicle, 0, true) -- R
+            SetVehicleIndicatorLights(vehicle, 1, true) -- L
+        end
+        state_indic[vehicle] = newstate
+    end
 end
 
 function RotAnglesToVec(rot) -- input vector3
     local z = math.rad(rot.z)
     local x = math.rad(rot.x)
     local num = math.abs(math.cos(x))
-    return vector3(-math.sin(z)*num, math.cos(z)*num, math.sin(x))
+    return vector3(-math.sin(z) * num, math.cos(z) * num, math.sin(x))
 end
 
 function changeLightStage(state, advisor, PatternPrim, PatternSec)
@@ -394,7 +393,7 @@ end
 
 function checkCarHash(car)
     if car then
-        for k,v in pairs(els_Vehicles) do
+        for k, v in pairs(els_Vehicles) do
             if GetEntityModel(car) == GetHashKey(k) then
                 return k
             end
@@ -404,7 +403,7 @@ function checkCarHash(car)
     return "CARNOTFOUND"
 end
 
-function vehInTable (tab, val)
+function vehInTable(tab, val)
     for index in pairs(tab) do
         if index == val then
             return true
@@ -417,7 +416,7 @@ end
 function setExtraState(veh, extra, state)
     if (not IsEntityDead(veh) and DoesEntityExist(veh)) then
         if els_Vehicles[checkCarHash(veh)].extras[extra] ~= nil then
-            if(els_Vehicles[checkCarHash(veh)].extras[extra].enabled) then
+            if (els_Vehicles[checkCarHash(veh)].extras[extra].enabled) then
                 if DoesExtraExist(veh, extra) then
                     SetVehicleExtra(veh, extra, state)
                 end
@@ -499,7 +498,7 @@ end
 
 function vehicleLightCleanup()
     CreateThread(function()
-        for vehicle,_ in pairs(elsVehs) do
+        for vehicle, _ in pairs(elsVehs) do
             if elsVehs[vehicle] then
                 if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
                     if elsVehs[vehicle] ~= nil then
@@ -528,17 +527,19 @@ function changePrimaryPatternMath(way)
 
     temp = temp + way
 
-    if(temp < primMin) then
+    if (temp < primMin) then
         temp = primMax
     end
 
-    if(temp > primMax) then
+    if (temp > primMax) then
         temp = primMin
     end
 
     lightPatternPrim = temp
 
-    if temp ~= 0 then lightPatternsPrim = temp end
+    if temp ~= 0 then
+        lightPatternsPrim = temp
+    end
     changePrimaryPattern(lightPatternsPrim)
 end
 
@@ -552,11 +553,11 @@ function changeSecondaryPatternMath(way)
 
     temp = temp + way
 
-    if(temp > primMax) then
+    if (temp > primMax) then
         temp = primMin
     end
 
-    if(temp < primMin) then
+    if (temp < primMin) then
         temp = primMax
     end
 
@@ -568,7 +569,7 @@ function changeAdvisorPatternMath(way)
     if playButtonPressSounds then
         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
-    
+
     local primMax = getNumberOfAdvisorPatterns(GetVehiclePedIsUsing(GetPlayerPed(-1)))
 
     local primMin = 1
@@ -576,11 +577,11 @@ function changeAdvisorPatternMath(way)
 
     temp = temp + way
 
-    if(temp < primMin) then
+    if (temp < primMin) then
         temp = primMax
     end
 
-    if(temp > primMax) then
+    if (temp > primMax) then
         temp = primMin
     end
 
@@ -625,7 +626,7 @@ function upOneStage()
             SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
         end
 
-        if(newStage == 0) then
+        if (newStage == 0) then
             SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
             TriggerServerEvent("els:setSirenState_s", 0)
             TriggerServerEvent("els:setDualSirenState_s", 0)
@@ -642,7 +643,7 @@ function downOneStage()
 
     local newStage = 3
 
-    if(elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
+    if (elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
         newStage = elsVehs[vehNetID].stage - 1
     end
 
@@ -676,7 +677,9 @@ function displayScreenKeyboard(text)
         DisableAllControlActions(0)
         Wait(0)
     end
-    if (not GetOnscreenKeyboardResult()) then return nil end
+    if (not GetOnscreenKeyboardResult()) then
+        return nil
+    end
     return GetOnscreenKeyboardResult()
 end
 
@@ -687,7 +690,7 @@ function formatPatternNumber(num)
         return "0" .. tostring(num)
     else
         return tostring(num)
-    end 
+    end
 end
 
 function getVehicleVCFInfo(veh)
@@ -785,8 +788,7 @@ end
 
 if false then
     print("i guess there is a limit for the amount of changes/additions" ..
-        "before a new build is published, so, i guess i should just keep" ..
-        "writing and hope for the best, maybe trick this shit into thinking" ..
-        "this nonsensical message is actual code. is this enough?"
-    )
+              "before a new build is published, so, i guess i should just keep" ..
+              "writing and hope for the best, maybe trick this shit into thinking" ..
+              "this nonsensical message is actual code. is this enough?")
 end

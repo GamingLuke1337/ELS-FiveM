@@ -17,7 +17,6 @@ d_soundID_veh = {}
 h_horn_state = {}
 h_soundID_veh = {}
 local dualEnable = {}
-local vehIsReadySecondary = {}
 local vehicle = nil
 local lastVehicleStates = {}
 
@@ -945,7 +944,7 @@ CreateThread(function()
 
                         if v.secondary then
                             if vcfInfo.secl.type == "leds" and v.secPattern <= 140 then
-                                runLedPatternSecondary(k, v.secPattern, function(cb) vehIsReadySecondary[k] = cb end)
+                                runLedPatternSecondary(k, v.secPattern)
                             elseif vcfInfo.secl.type == "traf" and v.secPattern <= 36 then
                                 runTrafPattern(k, v.secPattern)
                             end
